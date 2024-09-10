@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FreeBe & 冒险者公会招募流程
 
-## Getting Started
+## 简介
+运营冒险者公会的公司是冒险者科技，大家可以上网找到。公司专注于软件生产研发的过程，因为项目资源足够丰富，因此不需要也没时间在网络上有公开的资源。如果大家想要了解，我们会邀请公会创始人，进行一次分享。
 
-First, run the development server:
+如果大家想要了解 FreeBe 社区：
+1. 查看公众号：自遊民计划
+2. 查看我们之前的 notion https://free-be.notion.site/FreeBe-DAO-e47ae384b5ab4f2bad3ad9001dd1e8b3
+3. 到我们的线上协作空间 https://meta.free-be.xyz/member/index，看我们日常的运转过程
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+如果希望成为冒险公会的一员，成为有稳定收入的远程工作者，您可以填写问卷：https://tally.so/r/wvLYxv （填写社区开发者问卷，可以不填写冒险者公会问卷）
+如果希望成为 FreeBe 社区的一员，您可以填写问卷：https://tally.so/r/nW0BNv
+如果希望成为 FreeBe 社区开发者中的一员，您可以填写问卷：https://tally.so/r/mZl6ye
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+填写问卷后，筛选合格的，开启我们的冒险者考察之旅，考察规则如下，如果不希望参加考察，我们尊重您的选择。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 考察规则：
+考察方发布考察性任务，这些任务可以被多人同时认领。
+任务分成三个等级
+- L1 简单 100 经验值
+- L2 较难 200 经验值
+- L3 困难 500 经验值
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+完成任务的过程
+1. 认领自己感兴趣的任务
+2. fork 项目到自己的 github 账号下
+3. 创建任务分支，完成开发
+4. 提交 pr，pr 提交信息备注自己的微信 id，和任务名称
+5. code master 执行 review
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  
