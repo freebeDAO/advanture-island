@@ -27,7 +27,7 @@
 3. 创建任务分支，完成开发，开发规范
     - 在 components 目录下创建 component，如果目录重名，加上自己的标识
     - 完成 components 的开发后，在 test 目录下创建组件的测试 demo，如果目录重名，加上自己的标识
-1. 提交 pr，pr 提交信息备注自己的微信 id，和任务名称
+1. 提交 pr，目标分支选择 advanture-test (不要选择 main 分支)，pr 提交信息备注自己的微信 id，和任务名称
 2. code master 执行 review
 
   
