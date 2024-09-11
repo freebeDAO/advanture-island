@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 function ScaledComponent(props: any) {
   const isDragVal = useRef(false);
@@ -37,29 +37,8 @@ function ScaledComponent(props: any) {
   }
 
   const onMouseUp = () => {
-    console.log('-----------------');
     isDragVal.current = false
   }
-
-  useEffect(() => {
-    // fetch('/api/graph?id=1').then(r => {
-    //   console.log('r', r);
-    // });
-    // fetch('/api/graph').then(r => {
-    //   console.log('r', r);
-    // });
-
-    // fetch('/api/graph', {
-    //   method: "PATCH",
-    //   body: JSON.stringify({
-    //     id: 4,
-    //     x: 200,
-    //     y: 100
-    //   })
-    // }).then(r => {
-    //   console.log('r', r);
-    // });
-  })
 
   return (
     <div style={styleVal} className='w-[240px] h-[240px] bg-gray-800 cursor-pointer' onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp} onMouseOut={onMouseUp}>

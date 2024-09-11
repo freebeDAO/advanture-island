@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import ConnectComponent from 'src/components/ConnectComponent';
 import DraggerComponent from 'src/components/DraggerComponent';
 import JumpableComponent from 'src/components/JumpableComponent';
 import TalkableComponent from 'src/components/TalkableComponent';
@@ -13,7 +14,7 @@ export default function Home() {
           {/* 添加任务组件用于展示 */}
           {/* <DraggerComponent /> */}
           {/* <JumpableComponent/> */}
-          <TalkableComponent/>
+          <ConnectComponent/>
         </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
