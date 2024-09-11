@@ -13,6 +13,29 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
     },
+    keyframes: {
+      bounce: {
+        "0%": {
+          transform: 'translateY(0%)',
+        },
+        "50%": {
+          // transform: 'translateY(200px)',
+          transform: 'translateY(var(--trans-value))',
+        },
+        "100%": {
+          transform: 'translateY(0%)',
+        },
+      },
+      spin: {
+        to: {
+          transform: 'rotate(360deg)',
+        },
+      },
+    },
+    animation: {
+      spin: 'spin 1s linear infinite',
+      bounce: "bounce 2s linear infinite",
+    },
   },
   plugins: [],
 };

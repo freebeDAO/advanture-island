@@ -40,7 +40,7 @@ function DraggerComponent(props: any) {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      className='w-[100px] h-[100px] absolute bg-red-500 cursor-pointer'
+      className='w-[100px] h-[100px] absolute bg-red-500 cursor-pointer animate-bounce'
     />
   );
 }
