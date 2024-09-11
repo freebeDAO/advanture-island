@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import DraggerComponent from 'src/components/DraggerComponent';
 import ScaledComponent from 'src/components/ScaledComponent';
 
 export default function Home() {
@@ -7,10 +8,11 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
         <h1 className="text-4xl font-bold">冒险公会-任务</h1>
         {/* 替换成自己完成的任务演示组件 */}
-        {/* <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-2 w-full">
-          添加任务组件用于展示
-        </h2> */}
-        <ScaledComponent/>
+        <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-2 w-full relative">
+          {/* 添加任务组件用于展示 */}
+          {/* <DraggerComponent /> */}
+          <ScaledComponent/>
+        </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
         <a
