@@ -1,0 +1,21 @@
+.box {
+    transition: transform 0.5s ease;
+  }
+  
+  .bounce {
+    animation: bounce 1s ease;
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-100px); /* 跳动高度 */
+      animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* 快速上升 */
+    }
+    100% {
+      transform: translateY(0); /* 回到原位 */
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); /* 下落加速 */
+    }
+  }
