@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import JumpableComponent from 'src/components/JumpableComponent';
 

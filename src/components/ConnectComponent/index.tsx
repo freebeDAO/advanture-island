@@ -22,7 +22,6 @@ function ConnectComponent(props: any) {
   }
 
   const getGraphAPI = () => {
-    console.log(helper(id));
     if (helper(id) !== "") {
       fetch(`/api/graph?id=${id}`)
         .then(r => {

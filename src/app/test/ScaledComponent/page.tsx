@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import ScaledComponent from 'src/components/ScaledComponent';
 
