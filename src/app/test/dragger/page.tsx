@@ -7,9 +7,6 @@ export default function Page() {
             <Avatar>
                 <AvatarImage src="/assets/logo.png"></AvatarImage>
             </Avatar>
-            <Avatar>
-                <AvatarImage src="/assets/logo.png"></AvatarImage>
-            </Avatar>
         </DraggerComponent>
     </div>
 }

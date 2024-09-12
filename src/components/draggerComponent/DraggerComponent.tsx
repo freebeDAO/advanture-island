@@ -1,7 +1,7 @@
 'use client'
 
 import {useDrag, useDrop, DndProvider} from "react-dnd";
-import React, {PropsWithChildren, useRef, useState} from "react";
+import React, {PropsWithChildren, useEffect, useRef, useState} from "react";
 import {HTML5Backend} from "react-dnd-html5-backend";
 
 // props类型
@@ -68,8 +68,11 @@ const DragContainer = ({children, containerStyle}: DraggerProps) => {
         }
     })
 
-    drop(containerRef)
-    drag(childRef)
+    useEffect(() => {
+        drop(containerRef)
+        drag(childRef)
+
+    },[])
 
     return <div className={`relative ${containerStyle}`} ref={containerRef}>
         <div ref={childRef} className={`cursor-move inline-block relative ${dragging ? 'opacity-0' : 'opacity-1'}`}
