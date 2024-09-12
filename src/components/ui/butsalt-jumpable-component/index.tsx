@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
 
 // 功能：点击组件或按空格时，会向上跳起再落下
-const Jumpable: React.FC = () => {
+const JumpableComponent: React.FC = () => {
   const [animating, setAnimating] = useState(false);
 
   const animate = useCallback(() => {
@@ -46,4 +46,4 @@ const Jumpable: React.FC = () => {
   );
 }
 
-export { Jumpable };
+export { JumpableComponent };
