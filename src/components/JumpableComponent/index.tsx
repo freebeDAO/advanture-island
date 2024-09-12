@@ -7,9 +7,9 @@ function JumpableComponent(props: any) {
   const [styleVal, setStyleVal] = useState<any>({
     animation: "bounce 1s linear",
     animationPlayState: "paused",
-  })
+  });
 
-  const styleEl = useRef<HTMLDivElement>(null)
+  const styleEl = useRef<HTMLDivElement>(null);
 
   const clickHandler = () => {
     setStyleVal({

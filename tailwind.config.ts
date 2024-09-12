@@ -16,24 +16,29 @@ const config: Config = {
     keyframes: {
       bounce: {
         "0%": {
-          transform: 'translateY(0%)',
+          transform: "translateY(0%)",
         },
         "50%": {
-          // transform: 'translateY(200px)',
-          transform: 'translateY(var(--trans-value))',
+          transform: "translateY(var(--trans-value))",
         },
         "100%": {
-          transform: 'translateY(0%)',
+          transform: "translateY(0%)",
         },
       },
-      spin: {
-        to: {
-          transform: 'rotate(360deg)',
+      scale: {
+        "0%": {
+          transform: "scale(1.0)",
+        },
+        "50%": {
+          transform: "scale(var(--trans-scale))",
+        },
+        "100%": {
+          transform: "scale(1.0)",
         },
       },
     },
     animation: {
-      spin: 'spin 1s linear infinite',
+      scale: "spin 1.5s linear infinite",
       bounce: "bounce 2s linear infinite",
     },
   },
