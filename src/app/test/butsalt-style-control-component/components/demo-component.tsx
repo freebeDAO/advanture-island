@@ -1,7 +1,7 @@
 'use client';
 import { useState } from "react";
 import { StyleControlComponent, StyleControlComponentProps } from "src/components/ui/butsalt-style-control-component";
-import { FontH, FontV } from "src/components/ui/butsalt-style-control-component/components/text";
+import { FontH, FontV } from "src/components/ui/butsalt-style-control-component";
 
 export type DemoComponentProps = {
   initialModel: Required<StyleControlComponentProps>;

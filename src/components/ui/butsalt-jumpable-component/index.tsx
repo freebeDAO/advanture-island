@@ -1,5 +1,5 @@
 'use client'
-import { Children, cloneElement } from 'react';
+import { cloneElement } from 'react';
 import styles from './styles.module.css';
 import { useState, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
@@ -7,7 +7,7 @@ import clsx from 'clsx';
 // 功能：点击组件或按空格时，会向上跳起再落下
 type JumpableComponentProps = {
   children: JSX.Element | string
-}
+};
 
 const JumpableComponent: React.FC<JumpableComponentProps> = ({ children }) => {
   let wrapper: React.ReactNode;

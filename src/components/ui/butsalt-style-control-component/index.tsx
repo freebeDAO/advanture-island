@@ -3,28 +3,45 @@ import { Rect } from './components/rect';
 import { Ellipse } from './components/ellipse';
 import styles from './styles.module.css';
 import { Triangle } from './components/triangle';
-import { Text, TextProps } from './components/text'
+import { Text } from './components/text'
 
 export type Shape = 'circle' | 'ellipse' | 'rect' | 'triangle';
 
 export type ShapeStyle = {
-  borderColor: string;
-  borderWidth: number;
-  borderRadius: number;
-  backgroundColor: string;
+  borderColor: string; // 边框颜色
+  borderWidth: number; // 边框宽度
+  borderRadius: number; // 边框圆角
+  backgroundColor: string; // 背景颜色
+};
+
+export type FontH = 'left' | 'center' | 'right';
+export type FontV = 'top' | 'center' | 'bottom';
+export type FontStyle = {
+  fontH: FontH; // 水平位置
+  fontV: FontV; // 垂直位置
+  fontSize: number; // 字号
+  fontColor: string; // 字体颜色
 };
 
 export type StyleControlComponentProps = {
   shape: Shape;
-} & Partial<ShapeStyle> & Pick<TextProps, 'fontH' | 'fontV' | 'fontSize' | 'fontColor' | 'children'>;
+  children: React.ReactNode
+} & Partial<ShapeStyle> & Partial<FontStyle>;
 
-// 功能：点击组件或按空格时，会向上跳起再落下
-const StyleControlComponent: React.FC<StyleControlComponentProps> = ({ shape, ...extraProps }) => {
-  const shapeStyle: Required<ShapeStyle> = {
-    borderRadius: extraProps.borderRadius ?? 0,
-    borderColor: extraProps.borderColor ?? 'transparent',
-    borderWidth: extraProps.borderWidth ?? 0,
-    backgroundColor: extraProps.backgroundColor ?? 'transparent'
+// 功能：渲染不同形状
+const StyleControlComponent: React.FC<StyleControlComponentProps> = ({ shape, ...props }) => {
+  const shapeStyle: ShapeStyle = {
+    borderRadius: props.borderRadius ?? 0,
+    borderColor: props.borderColor ?? 'transparent',
+    borderWidth: props.borderWidth ?? 0,
+    backgroundColor: props.backgroundColor ?? 'transparent'
+  };
+
+  const fontStyle: FontStyle = {
+    fontH: props.fontH ?? 'center',
+    fontV: props.fontV ?? 'center',
+    fontSize: props.fontSize ?? 14,
+    fontColor: props.fontColor ?? '#000'
   };
 
   let svgContent: React.ReactNode | null = null;
@@ -67,12 +84,9 @@ const StyleControlComponent: React.FC<StyleControlComponentProps> = ({ shape, ..
         shape={shape}
         borderRadius={shapeStyle.borderRadius}
         borderWidth={shapeStyle.borderWidth}
-        fontH={extraProps.fontH}
-        fontV={extraProps.fontV}
-        fontSize={extraProps.fontSize}
-        fontColor={extraProps.fontColor}
+        {...fontStyle}
       >
-        {extraProps.children}
+        {props.children}
       </Text>
     </div>
   );

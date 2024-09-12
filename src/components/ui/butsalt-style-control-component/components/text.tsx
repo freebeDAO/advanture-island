@@ -1,21 +1,14 @@
 import clsx from 'clsx';
 import styles from '../styles.module.css';
-import { Shape } from '..';
+import { FontStyle, Shape } from '..';
 import { getTextSize } from '../utils';
-
-export type FontH = 'left' | 'center' | 'right';
-export type FontV = 'top' | 'center' | 'bottom';
 
 export type TextProps = {
   shape: Shape;
   borderWidth: number;
   borderRadius: number;
-  fontH: FontH;
-  fontV: FontV;
-  fontSize: number;
-  fontColor: string;
   children?: React.ReactNode
-};
+} & FontStyle;
 
 export const Text: React.FC<TextProps> = ({
   shape,
