@@ -16,8 +16,6 @@
 }
 
 .main {
-  width: 100px;
-  height: 100px;
   animation-name: jump;
   animation-duration: 0.7s;
   animation-iteration-count: infinite;

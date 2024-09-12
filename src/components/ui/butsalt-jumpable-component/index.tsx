@@ -1,10 +1,22 @@
 'use client'
+import { Children, cloneElement } from 'react';
 import styles from './styles.module.css';
 import { useState, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
 
 // 功能：点击组件或按空格时，会向上跳起再落下
-const JumpableComponent: React.FC = () => {
+type JumpableComponentProps = {
+  children: JSX.Element | string
+}
+
+const JumpableComponent: React.FC<JumpableComponentProps> = ({ children }) => {
+  let wrapper: React.ReactNode;
+  if (typeof children === 'string') {
+    wrapper = <span className="inline-block">{children}</span>;
+  } else {
+    wrapper = children;
+  }
+
   const [animating, setAnimating] = useState(false);
 
   const animate = useCallback(() => {
@@ -31,18 +43,23 @@ const JumpableComponent: React.FC = () => {
     };
   }, [animate]);
 
-  return (
-    <div
-      className={clsx(
+  return cloneElement(
+    wrapper,
+    {
+      className: clsx(
+        wrapper.props.className,
         styles.main,
-        'bg-cyan-500',
         animating && styles.animating
-      )}
-      onClick={animate}
-      onAnimationIteration={() => {
+      ),
+      onClick: (e: React.MouseEvent) => {
+        animate();
+        wrapper.props.onClick?.(e);
+      },
+      onAnimationIteration: (e: React.AnimationEvent) => {
         setAnimating(false);
-      }}
-    ></div>
+        wrapper.props.onAnimationIteration?.(e);
+      }
+    }
   );
 }
 
