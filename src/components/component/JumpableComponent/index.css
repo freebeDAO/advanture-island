@@ -1,0 +1,31 @@
+.component {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.jump {
+    transform: translateY(-100px);
+}
+
+.jumping {
+    animation: jump 0.25s ease-in-out both;
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-100px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

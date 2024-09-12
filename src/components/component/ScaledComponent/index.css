@@ -1,0 +1,30 @@
+.component {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.innerComponent {
+    width: 200px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+    transform-origin: center center;
+}
+
+.button {
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 50px;
+    z-index: 999;
+}
