@@ -37,7 +37,7 @@ function ConnectComponent(props: any) {
   const deleteGraphAPI = () => {
     if (helper(id) === "") return
     fetch(`/api/graph?id=${id}`, {
-      method: "DELETE"
+      method: "DELETE",
     }).then(r => {
       console.log('r', r);
     });
@@ -51,7 +51,7 @@ function ConnectComponent(props: any) {
         id: id,
         x: xVal,
         y: yVal
-      })
+      }),
     }).then(r => {
       console.log('r', r);
     });
@@ -64,7 +64,7 @@ function ConnectComponent(props: any) {
       body: JSON.stringify({
         x: xVal,
         y: yVal
-      })
+      }),
     }).then(r => {
       console.log('r', r);
     });
