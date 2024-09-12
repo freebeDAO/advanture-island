@@ -1,6 +1,6 @@
 import { Shape } from ".";
 
-export function getTextSize(
+export function getTextStyle(
   {
     shape,
     borderWidth,
@@ -18,16 +18,12 @@ export function getTextSize(
   // 由于svg是用viewbox实现的自适应，所以borderWidth需要进行等比例换算
   switch (shape) {
     case 'circle':
-      {
-        width = 70 * (200 - borderWidth * 3) / 200;
-        height = width;
-      }
+      width = 70 * (200 - borderWidth * 3) / 200;
+      height = width;
       break;
     case 'ellipse':
-      {
-        width = 64 * (200 - borderWidth * 3) / 200;
-        height = 60 * (200 - borderWidth * 3) / 200;
-      }
+      width = 64 * (200 - borderWidth * 3) / 200;
+      height = 60 * (200 - borderWidth * 3) / 200;
       break;
     case 'rect':
       width = 100 * (200 - borderWidth * 2 - borderRadius / 1.5) / 200;
@@ -40,8 +36,8 @@ export function getTextSize(
       break;
   }
   return {
-    width: `${width}%`,
-    height: `${height}%`,
-    top: `${top}%`
+    width: `${width.toFixed(2)}%`,
+    height: `${height.toFixed(2)}%`,
+    top: top === undefined ? undefined : `${top.toFixed(2)}%`
   }
 }

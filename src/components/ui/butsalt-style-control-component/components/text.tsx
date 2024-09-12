@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import styles from '../styles.module.css';
 import { FontStyle, Shape } from '..';
-import { getTextSize } from '../utils';
+import { getTextStyle } from '../utils';
 
 export type TextProps = {
   shape: Shape;
@@ -36,7 +36,7 @@ export const Text: React.FC<TextProps> = ({
         )
       }
       style={{
-        ...getTextSize({
+        ...getTextStyle({
           shape,
           borderWidth,
           borderRadius
