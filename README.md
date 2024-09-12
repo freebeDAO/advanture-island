@@ -30,4 +30,39 @@
 1. 提交 pr，目标分支选择 advanture-test (不要选择 main 分支)，pr 提交信息备注自己的微信 id，和任务名称
 2. code master 执行 review
 
+## 任务列表
+
+### 添加 Mysql
+
+创建 DB
+```
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:8.0
+docker exec -it mysql-container mysql -u root -proot -e "CREATE DATABASE \`advanture-island\`;"
+
+```
+
+确认数据库创建成功
+```
+docker exec -it mysql-container mysql -u root -proot -e "SHOW DATABASES;"
+```
+
+更新 .env 文件：
+DATABASE_URL="mysql://root:root@127.0.0.1:3306/advanture-island?schema=public"
+
+### 添加 API
+
+```
+curl -X POST http://localhost:3000/api/points \
+  -H "Content-Type: application/json" \
+  -d '{"x": 10, "y": 20, "group": "group1"}'
+
+curl -X GET http://localhost:3000/api/points/1
+
+curl -X PUT http://localhost:3000/api/points/1 \
+  -H "Content-Type: application/json" \
+  -d '{"x": 30, "y": 40, "group": "group2"}'
+  
+curl -X DELETE http://localhost:3000/api/points/1
+```
+
   

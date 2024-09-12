@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Point {
+  id        Int      @id @default(autoincrement()) // 主键
+  x         Float    // X 坐标
+  y         Float    // Y 坐标
+  group     String   // 分组信息
+  createdAt DateTime @default(now())  // 创建时间
+  updatedAt DateTime @updatedAt       // 更新时间
+}
