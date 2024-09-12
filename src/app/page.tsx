@@ -3,6 +3,7 @@ import ScaledComponentDemo from "./test/ScaledComponentDemo";
 import DraggerComponentDemo from "./test/DraggerComponentDemo";
 import JumpableComponentDemo from "./test/JumpableComponentDemo";
 import MovableComponentDemo from "./test/MovableComponentDemo";
+import CircleComponentDemo from "./test/CircleComponentDemo";
 
 export default function Home() {
   return (
@@ -11,15 +12,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">冒险公会-任务</h1>
         {/* 替换成自己完成的任务演示组件 */}
         <h2 className=" text-2xl  text-gray-400 border border-gray-300 p-4 w-full">
-          <div className="flex">
-            {/* 添加任务组件用于展示 */}
-            <ScaledComponentDemo />
-            <div className="w-10" />
-            <DraggerComponentDemo />
-            <div className="w-10" />
-            <JumpableComponentDemo />
-          </div>
-          <div className="w-10" />
+          <CircleComponentDemo />
           <MovableComponentDemo />
         </h2>
       </main>
