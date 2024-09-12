@@ -14,6 +14,8 @@
     "next": "14.2.9",
     "radix-ui": "^1.0.1",
     "react": "^18",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18",
     "tailwind-merge": "^2.5.2"
   },
