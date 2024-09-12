@@ -6,24 +6,24 @@ type StyleType = Record<string, string>;
 
 function JumpableComponent() {
   const [styleVal, setStyleVal] = useState<StyleType>({
-    animation: "bounce 1s linear",
-    animationPlayState: "paused",
+    // animation: "bounce 1.5s linear running",
   });
 
   const styleEl = useRef<HTMLDivElement>(null);
 
   const clickHandler = () => {
+    const el = styleEl.current as HTMLDivElement;
+    if (el.style.animationPlayState) return
     setStyleVal({
-      animation: "bounce 1s linear",
-      animationPlayState: "running",
+      animation: "bounce 1.5s linear running",
     });
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === ' ') {
+    const el = styleEl.current as HTMLDivElement;
+    if (event.key === " " && el.style.animationPlayState === "") {
       setStyleVal({
-        animation: "bounce 1s linear",
-        animationPlayState: "running",
+        animation: "bounce 1.5s linear running",
       });
     }
   }
@@ -41,7 +41,7 @@ function JumpableComponent() {
   }, [])
 
   return (
-    <div ref={styleEl} style={styleVal} onAnimationEnd={onAnimationEnd} onClick={clickHandler} className='w-[100px] h-[100px] bg-red-500 cursor-pointer'>
+    <div ref={styleEl} style={styleVal} onAnimationEnd={onAnimationEnd} onClick={clickHandler} className='w-[100px] h-[100px] bg-red-500 cursor-pointer relative'>
       {/* transition-all duration-500 transition-linear animation-bounce */}
     </div>
   );
