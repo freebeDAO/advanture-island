@@ -45,7 +45,7 @@ const DragContainer = ({children, containerStyle}: DraggerProps) => {
                 let x = (offset.x - childRect?.width) + childRect.width / 2 - containerRect.x
                 let y = (offset.y - childRect?.height) + childRect.height / 2 - containerRect.y
 
-                // 检测拖动是否超出边界
+                // 检测拖动是否超出边界  超出则自动贴边
                 if (x < 0) {
                     x = 0
                 } else if (x + childRect.width > containerRect.width) {
