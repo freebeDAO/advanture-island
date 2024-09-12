@@ -37,7 +37,7 @@ function JumpableComponent(props: any) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     }
-  })
+  }, [])
 
   return (
     <div ref={styleEl} style={styleVal} onAnimationEnd={onAnimationEnd} onClick={clickHandler} className='w-[100px] h-[100px] bg-red-500 cursor-pointer'>

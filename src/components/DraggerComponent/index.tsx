@@ -1,27 +1,30 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function DraggerComponent(props: any) {
   const isDragging = useRef(false);
+  const offsetVal = useRef({ x: 0, y: 0 })
   // 使用 useState 来跟踪元素的位置
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   // 鼠标按下事件处理函数
   const handleMouseDown = (event: any) => {
     isDragging.current = true;
-    setOffset({
+    offsetVal.current = {
       x: event.clientX - position.x,
       y: event.clientY - position.y,
-    });
+    }
   };
 
   // 鼠标移动事件处理函数
   const handleMouseMove = (event: any) => {
     if (isDragging.current) {
+      const current = offsetVal.current;
+      // console.log('###########', event);
+
       setPosition({
-        x: event.clientX - offset.x,
-        y: event.clientY - offset.y,
+        x: event.clientX - current.x,
+        y: event.clientY - current.y,
       });
     }
   };
@@ -31,6 +34,16 @@ function DraggerComponent(props: any) {
     isDragging.current = false;
   };
 
+  useEffect(() => {
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [])
+
   return (
     <div
       style={{
@@ -38,9 +51,7 @@ function DraggerComponent(props: any) {
         top: position.y,
       }}
       onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      className='w-[100px] h-[100px] absolute bg-red-500 cursor-pointer animate-bounce'
+      className='w-[100px] h-[100px] absolute bg-red-500 rounded-lg cursor-pointer'
     />
   );
 }
