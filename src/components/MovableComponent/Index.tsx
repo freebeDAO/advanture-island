@@ -100,7 +100,7 @@ const Player = () => {
                 ...playerStateRef.current,
                 isBtnMoving: false,
                 isMouseMoving: true,
-                target: { x: e.clientX, y: e.clientY }
+                target: { x: e.x, y: e.y }
             }
             move()
 
@@ -113,18 +113,28 @@ const Player = () => {
 
         const dx = playerStateRef.current.target.x - playerStateRef.current.position.x;
         const dy = playerStateRef.current.target.y - playerStateRef.current.position.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const distance = Math.sqrt(Math.round(dx * dx + dy * dy));
 
         if (distance > 1 && playerStateRef.current.isMouseMoving) {
             const moveX = dx / distance * playerStateRef.current.speed;
             const moveY = dy / distance * playerStateRef.current.speed;
             const prev = playerStateRef.current.position
+            let position = {
+                x: prev.x + moveX,
+                y: prev.y + moveY
+            }
+            //路径修正
+            if (dx * dx <= playerStateRef.current.speed * playerStateRef.current.speed &&
+                dy * dy <= playerStateRef.current.speed * playerStateRef.current.speed
+            ) {
+                position = {
+                    x: playerStateRef.current.target.x,
+                    y: playerStateRef.current.target.y
+                }
+            }
             playerStateRef.current = {
                 ...playerStateRef.current,
-                position: {
-                    x: prev.x + moveX,
-                    y: prev.y + moveY
-                }
+                position
             }
             requestAnimationFrame(move);
         }
