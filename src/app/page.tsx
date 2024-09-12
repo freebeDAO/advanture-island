@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ScaledComponentDemo from "./test/ScaledComponentDemo";
 import DraggerComponentDemo from "./test/DraggerComponentDemo";
+import JumpableComponentDemo from "./test/JumpableComponentDemo";
 
 export default function Home() {
   return (
@@ -13,6 +14,8 @@ export default function Home() {
           <ScaledComponentDemo />
           <div className="w-10" />
           <DraggerComponentDemo />
+          <div className="w-10" />
+          <JumpableComponentDemo />
         </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
