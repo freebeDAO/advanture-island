@@ -65,4 +65,11 @@ curl -X PUT http://localhost:3000/api/points/1 \
 curl -X DELETE http://localhost:3000/api/points/1
 ```
 
+### 添加一个可移动的组件
+
+- 组件名称 MovableComponent
+- 位置需要写入到数据库（依赖 Node 创建任务）
+- 移动支持不同的方式，如键盘控制，鼠标点击屏幕某个位置，自动移动
+- 也支持自动移动，可设定移动方向和移动速度
+- 需要在 demo 下创建测试 Demo
   
