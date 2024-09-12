@@ -2,6 +2,7 @@ import Image from 'next/image';
 import ConnectComponent from 'src/components/ConnectComponent';
 import DraggerComponent from 'src/components/DraggerComponent';
 import JumpableComponent from 'src/components/JumpableComponent';
+import ScaledComponent from 'src/components/ScaledComponent';
 import TalkableComponent from 'src/components/TalkableComponent';
 
 export default function Home() {
@@ -12,9 +13,10 @@ export default function Home() {
         {/* 替换成自己完成的任务演示组件 */}
         <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-2 w-full relative">
           {/* 添加任务组件用于展示 */}
-          {/* <DraggerComponent /> */}
+          <DraggerComponent />
+          {/* <ScaledComponent/> */}
           {/* <JumpableComponent/> */}
-          <ConnectComponent/>
+          {/* <ConnectComponent/> */}
         </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">

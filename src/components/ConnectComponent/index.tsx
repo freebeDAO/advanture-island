@@ -1,14 +1,29 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import NodeGraph from 'src/models/node';
+
+const helper = (val: string) => {
+  const n = Number(val);
+  return val === "" || val.length > 12 || isNaN(n) ? '' : n;
+}
 
 // 暂无处理异常情况，即输入值异常-无法转换成数字的
 function ConnectComponent(props: any) {
-  const [id, setId] = useState('0');
-  const [xVal, setXVal] = useState('0');
-  const [yVal, setYVal] = useState('0');
+  const [id, setId] = useState('');
+  const [xVal, setXVal] = useState('');
+  const [yVal, setYVal] = useState('');
+
+  const model = useMemo(() => {
+    return new NodeGraph(xVal, yVal, id);
+  }, [id, xVal, yVal])
+
+  const setChanegeVal = (event: any, change: Function) => {
+    change(event.target.value);
+  }
 
   const getGraphAPI = () => {
-    if (id !== "") {
+    console.log(helper(id));
+    if (helper(id) !== "") {
       fetch(`/api/graph?id=${id}`)
         .then(r => {
           console.log('r', r);
@@ -21,7 +36,7 @@ function ConnectComponent(props: any) {
   }
 
   const deleteGraphAPI = () => {
-    if (id === "") return
+    if (helper(id) === "") return
     fetch(`/api/graph?id=${id}`, {
       method: "DELETE"
     }).then(r => {
@@ -30,7 +45,7 @@ function ConnectComponent(props: any) {
   }
 
   const updateGraphAPI = () => {
-    if (id === "" || xVal === "" || yVal === "") return
+    if (helper(id) === "" || helper(xVal) === "" || helper(yVal) === "") return
     fetch('/api/graph', {
       method: "PATCH",
       body: JSON.stringify({
@@ -44,7 +59,7 @@ function ConnectComponent(props: any) {
   }
 
   const createGraphAPI = () => {
-    if (xVal === "" || yVal === "") return
+    if (helper(xVal) === "" || helper(yVal) === "") return
     fetch('/api/graph', {
       method: "POST",
       body: JSON.stringify({
@@ -61,15 +76,15 @@ function ConnectComponent(props: any) {
       <div className='pl-[20px]'>
         <div className='flex items-center'>
           <span className='flex w-[24px]'>id</span>
-          <input type="text" className='border-2 border-solid border-gray-500 rounded m-4' onChange={(e) => setId(e.target.value)} />
+          <input type="text" className='border-2 border-solid border-gray-500 rounded m-4' value={id} onChange={(e) => setId(e.target.value)} />
         </div>
-        <div className='flex'>
+        <div className='flex items-center'>
           <span className='flex w-[24px]'>x</span>
-          <input type="text" className='border-2 border-solid border-gray-500 rounded m-4' onChange={(e) => setXVal(e.target.value)} />
+          <input type="text" className='border-2 border-solid border-gray-500 rounded m-4' value={xVal} onChange={(e) => setXVal(e.target.value)} />
         </div>
-        <div className='flex'>
+        <div className='flex items-center'>
           <span className='flex w-[24px]'>y</span>
-          <input type="text" className='border-2 border-solid border-gray-500 rounded m-4' onChange={(e) => setYVal(e.target.value)} />
+          <input type="text" className='border-2 border-solid border-gray-500 rounded m-4' value={yVal} onChange={(e) => setYVal(e.target.value)} />
         </div>
       </div>
       <div className='flex justify-around'>
