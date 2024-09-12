@@ -15,8 +15,16 @@ const MovableComponentsDemo: React.FC = () => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-
         setPosition({x, y});
+
+        // Only save the data to the server when clicked
+        fetch('/api/points', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({x, y, group: 'group1'})
+        })
     };
 
     const handleDirectionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
