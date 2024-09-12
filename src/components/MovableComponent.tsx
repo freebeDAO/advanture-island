@@ -1,9 +1,11 @@
 'use client'
-import React, {useState, useEffect, ReactNode, useRef} from 'react';
+import React, {useState, useEffect, ReactNode, useRef, useCallback} from 'react';
 
 type MovableComponentProps = {
     children: ReactNode;
-    position: { x: number; y: number }; // 接收位置的 Props
+    position: { x: number; y: number };
+    direction?: string;
+    speed?: number;
 }
 
 type Position = {
@@ -11,7 +13,7 @@ type Position = {
     y: number;
 }
 
-const MovableComponent: React.FC<MovableComponentProps> = ({ children, position: initPosition }) => {
+const MovableComponent: React.FC<MovableComponentProps> = ({ children, position: initPosition, direction, speed }) => {
     const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
     const [keysPressed, setKeysPressed] = useState<Set<string>>(new Set());
     const animationFrameId = useRef<number | null>(null);
@@ -32,7 +34,7 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ children, position:
         });
     };
 
-    const handleMovement = () => {
+    const handleMovement = useCallback(() => {
         keysPressed.forEach((key) => {
             switch (key) {
                 case 'ArrowUp':
@@ -52,11 +54,29 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ children, position:
             }
         });
 
-        // 如果有按键按下，继续请求动画帧
         if (keysPressed.size > 0) {
             animationFrameId.current = requestAnimationFrame(handleMovement);
         }
-    };;
+
+        if (direction && speed) {
+            switch (direction) {
+                case 'up':
+                    move(0, -speed);
+                    break;
+                case 'down':
+                    move(0, speed);
+                    break;
+                case 'left':
+                    move(-speed, 0);
+                    break;
+                case 'right':
+                    move(speed, 0);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }, [direction, keysPressed, speed]);
 
     useEffect(() => {
         const startMoving = () => {
@@ -75,20 +95,30 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ children, position:
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
 
-        // 当按键按下时，启动移动
         if (keysPressed.size > 0) {
             startMoving();
         } else {
             stopMoving();
         }
 
-        // 清理事件监听和动画帧
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
             stopMoving();
         };
     }, [handleMovement, keysPressed]);
+
+    useEffect(() => {
+        setPosition(position);
+
+        animationFrameId.current = requestAnimationFrame(handleMovement);
+
+        return () => {
+            if (animationFrameId.current !== null) {
+                cancelAnimationFrame(animationFrameId.current);
+            }
+        };
+    }, [position, direction, speed, handleMovement]);
 
     useEffect(() => {
         setPosition(initPosition);
