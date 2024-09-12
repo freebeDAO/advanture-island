@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 
-function DraggerComponent(props: any) {
+function DraggerComponent() {
   const isDragging = useRef(false);
   const offsetVal = useRef({ x: 0, y: 0 })
   // 使用 useState 来跟踪元素的位置
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   // 鼠标按下事件处理函数
-  const handleMouseDown = (event: any) => {
+  const handleMouseDown = (event: React.MouseEvent) => {
     isDragging.current = true;
     offsetVal.current = {
       x: event.clientX - position.x,
@@ -17,7 +17,7 @@ function DraggerComponent(props: any) {
   };
 
   // 鼠标移动事件处理函数
-  const handleMouseMove = (event: any) => {
+  const handleMouseMove = (event: MouseEvent) => {
     if (isDragging.current) {
       const current = offsetVal.current;
       // console.log('###########', event);

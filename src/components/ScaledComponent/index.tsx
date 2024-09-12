@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from 'react';
 
-function ScaledComponent(props: any) {
-  const [styleVal, setStyleVal] = useState<any>({})
+type StyleType = Record<string, string>;
+
+function ScaledComponent() {
+  const [styleVal, setStyleVal] = useState<StyleType>({});
 
   const onMouseEnter = () => {
     console.log('onMouseEnter');

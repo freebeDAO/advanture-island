@@ -2,9 +2,10 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
+type StyleType = Record<string, string>;
 
-function JumpableComponent(props: any) {
-  const [styleVal, setStyleVal] = useState<any>({
+function JumpableComponent() {
+  const [styleVal, setStyleVal] = useState<StyleType>({
     animation: "bounce 1s linear",
     animationPlayState: "paused",
   });
@@ -18,7 +19,7 @@ function JumpableComponent(props: any) {
     });
   }
 
-  const handleKeyDown = (event: any) => {
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === ' ') {
       setStyleVal({
         animation: "bounce 1s linear",
@@ -27,7 +28,7 @@ function JumpableComponent(props: any) {
     }
   }
 
-  const onAnimationEnd = () => setStyleVal(null);
+  const onAnimationEnd = () => setStyleVal({});
 
   useEffect(() => {
     // 设置CSS变量

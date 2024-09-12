@@ -14,10 +14,10 @@ const autoTrackChange = (changeVal: ChangeValFn, checkRun: () => boolean) => {
   }, 1000);
 }
 
-function Home(props: any) {
+function Home() {
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <MoveComponent step={10} elMoveChaneg={autoTrackChange}/>
+      <MoveComponent step={10} elMoveChange={autoTrackChange}/>
     </div>
   );
 }

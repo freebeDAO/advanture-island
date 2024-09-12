@@ -12,7 +12,7 @@ type CheckRunFn = () => boolean
 
 type MoveCmptProp = {
   step: number;
-  elMoveChaneg?: (changeVal: AliasFn, checkRun: CheckRunFn) => void
+  elMoveChange?: (changeVal: AliasFn, checkRun: CheckRunFn) => void
 }
 
 const dicts = new Map([
@@ -33,7 +33,7 @@ function MoveComponent(props: MoveCmptProp) {
   const [position, setPosition] = useState<PostPropType>({ x: 0, y: 0 });
 
   // 鼠标按下事件处理函数
-  const handleMouseDown = (event: any) => {
+  const handleMouseDown = (event: React.MouseEvent) => {
     isDragging.current = true;
     isUserAction.current = true;
     offsetVal.current = {
@@ -43,7 +43,7 @@ function MoveComponent(props: MoveCmptProp) {
   };
 
   // 鼠标移动事件处理函数
-  const handleMouseMove = (event: any) => {
+  const handleMouseMove = (event: MouseEvent) => {
     if (isDragging.current) {
       const current = offsetVal.current;
       setPosition({
@@ -63,11 +63,11 @@ function MoveComponent(props: MoveCmptProp) {
   // 检查当前是否在进行用户操作
   const checkRun = () => isUserAction.current;
 
-  const autoElMoveChaneg = () => {
-    props.elMoveChaneg?.(setPosition, checkRun);
+  const autoelMoveChange = () => {
+    props.elMoveChange?.(setPosition, checkRun);
   }
 
-  const handelKeyDown = (event: any) => {
+  const handelKeyDown = (event: KeyboardEvent) => {
     isUserAction.current = true;
     const callback = dicts.get(event.key);
     if (callback) {
@@ -91,7 +91,7 @@ function MoveComponent(props: MoveCmptProp) {
     }
   }
 
-  const handleClickDown = (event: any) => {
+  const handleClickDown = (event: MouseEvent) => {
     if (isMovedVal.current) {
       isMovedVal.current = false;
     } else {
@@ -113,7 +113,7 @@ function MoveComponent(props: MoveCmptProp) {
   }
 
   useEffect(() => {
-    autoElMoveChaneg();
+    autoelMoveChange();
     setLocationVal();
     document.addEventListener('click', handleClickDown);
     document.addEventListener("mouseup", handleMouseUp);
@@ -136,7 +136,6 @@ function MoveComponent(props: MoveCmptProp) {
 
   return (
     <div
-
       ref={postEl}
       style={{
         left: position.x,

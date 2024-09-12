@@ -1,8 +1,8 @@
 "use client";
 import React, { useRef, useState } from 'react';
 
-function TalkableComponent(props: any) {
-  const dialog = useRef<any>(null)
+function TalkableComponent() {
+  const dialog = useRef<HTMLDialogElement>(null)
   const [tetxVal, setTextVal] = useState("");
 
   const clickHandler = () => {
@@ -15,7 +15,7 @@ function TalkableComponent(props: any) {
   }
 
   const closeModal = () => {
-    dialog.current.close();
+    dialog.current?.close();
   }
 
   return (

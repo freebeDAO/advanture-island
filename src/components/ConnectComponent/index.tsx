@@ -8,7 +8,7 @@ const helper = (val: string) => {
 }
 
 // 暂无处理异常情况，即输入值异常-无法转换成数字的
-function ConnectComponent(props: any) {
+function ConnectComponent() {
   const [id, setId] = useState('');
   const [xVal, setXVal] = useState('');
   const [yVal, setYVal] = useState('');
