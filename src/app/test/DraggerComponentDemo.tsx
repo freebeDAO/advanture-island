@@ -8,7 +8,7 @@ import DraggerComponent from "src/components/component/DraggerComponent";
  */
 const DraggerComponentDemo: React.FC = () => {
   return (
-    <div className="w-80">
+    <div className="w-80 h-80">
       <div className="relative w-full h-screen ">
         <h1 className="text-2xl font-bold mb-4">
           2. 创建一个拖动的组件，使对象可以被拖动
