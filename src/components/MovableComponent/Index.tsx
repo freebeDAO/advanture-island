@@ -185,7 +185,7 @@ const Player = () => {
     };
 
     // 停止自动移动
-    const stopAutoMove = (e) => {
+    const stopAutoMove = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         setPlayerState({ ...playerState, isBtnMoving: false, isMouseMoving: false })
     };
@@ -199,7 +199,7 @@ const Player = () => {
         }
     };
     //重置位置
-    const back = (e) => {
+    const back = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         setPlayerState({ ...playerState, isBtnMoving: false, isMouseMoving: false, position: { x: window.innerWidth / 2, y: window.innerHeight / 2 } })
     };

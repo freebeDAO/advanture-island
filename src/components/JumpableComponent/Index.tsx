@@ -1,9 +1,12 @@
 
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, CSSProperties, ReactNode } from 'react';
 import './JumpableComponent.css'; // 引入 CSS 样式文件
-
-const Jumpable = ({ children, style }) => {
+interface DraggableProps {
+  children: ReactNode;
+  style: CSSProperties;
+}
+const Jumpable = ({ children, style }: DraggableProps) => {
   const [isBouncing, setIsBouncing] = useState(false);
 
   // 处理点击事件
@@ -12,7 +15,7 @@ const Jumpable = ({ children, style }) => {
   };
 
   // 处理空格键事件
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === ' ') {
       event.preventDefault(); // 防止空格键滚动页面
       triggerBounce();

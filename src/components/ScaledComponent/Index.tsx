@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from 'react';
-const Scaled = ({ children }) => {
+import React, { ReactNode, useState } from 'react';
+const Scaled = (children: ReactNode) => {
     const [scale, setScale] = useState(1);
 
     const handleZoomIn = () => {

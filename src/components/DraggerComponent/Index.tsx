@@ -1,21 +1,25 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-const Draggable = ({ children, style }) => {
+import React, { CSSProperties, ReactNode, useEffect, useState } from 'react';
+interface DraggableProps {
+    children: ReactNode;
+    style: CSSProperties;
+}
+const Draggable = ({ children, style }: DraggableProps) => {
     const [position, setPosition] = useState({ x: style.left, y: style.top });
     const [isDragging, setIsDragging] = useState(false);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
 
     // 开始拖动，记录鼠标点击时的位置
-    const handleMouseDown = (event) => {
+    const handleMouseDown = (event: React.MouseEvent) => {
         setIsDragging(true);
         setOffset({
-            x: event.clientX - position.x,
-            y: event.clientY - position.y,
+            x: event.clientX - Number(position.x),
+            y: event.clientY - Number(position.y),
         });
     };
 
     // 处理鼠标移动，更新组件的位置
-    const handleMouseMove = (event) => {
+    const handleMouseMove = (event: MouseEvent) => {
         if (isDragging) {
             setPosition({
                 x: event.clientX - offset.x,
