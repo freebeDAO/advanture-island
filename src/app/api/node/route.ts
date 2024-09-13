@@ -1,5 +1,4 @@
 
-import { Coinbase, Wallet } from "@coinbase/coinbase-sdk";
 import { NextRequest } from "next/server";
 import { Node } from "src/entities/Node";
 import { AppDataSource } from "src/lib/utils/dbconfig";
