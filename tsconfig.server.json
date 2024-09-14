@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "lib": ["ESNext"],
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "isolatedModules": false,
+    "noEmit": false,
+    "typeRoots": ["./node_modules/@types", "./types"]  // 指向包含类型声明的文件夹
+  },
+  "include": ["server.ts",
+    "types/**/*.d.ts"
+  ]  // 包含类型声明文件
+}

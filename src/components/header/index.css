@@ -1,0 +1,25 @@
+.nav-header {
+  @apply h-[70px] flex justify-between items-center w-full py-[16px] px-[20px];
+}
+
+.login-content {
+  @apply w-[48px] h-[48px] rounded-full border-2 border-[#2D2951] flex items-center justify-center;
+}
+
+.btn {
+  @apply w-[140px] h-[32px] px-[16px] text-sm text-white leading-[32px] rounded-[14px] bg-gradient-to-r from-[#8A2BE2] to-[#5D3FD3] font-bold text-center;
+}
+
+.account {
+  @apply flex items-center justify-between w-[140px] h-[32px] px-[16px] rounded-[20px] text-sm;
+}
+
+.spot {
+  @apply w-[10px] h-[10px] bg-[#21206D] ml-5 rounded-full;
+}
+.avatar{
+  @apply w-7 h-7 rounded-full border-2 border-[#2D2951]
+}
+.login-out {
+  @apply w-[120px] h-[40px] rounded-full px-[20px] bg-[#e3e3e3]
+}
