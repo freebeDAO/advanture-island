@@ -1,6 +1,5 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {authChallenge, authVerify, authCheck, userDetail} from './api'
-import React from 'react';
 import slice from './slice';
 import getWeb3 from '../../lib/tools/getWeb3';
 import {getCookie, setCookie, deleteCookie} from "src/lib/tools/cookie";

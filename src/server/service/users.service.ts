@@ -7,7 +7,7 @@ function getAll() {
     return users.findAll();
 }
 
-function createUser(body: userType) {
+function createUser(body: { address: string; createTime: string; updateTime: string }) {
     return models.users.create(body);
 }
 

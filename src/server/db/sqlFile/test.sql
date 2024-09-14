@@ -11,11 +11,24 @@
  Target Server Version : 80033 (8.0.33)
  File Encoding         : 65001
 
- Date: 14/09/2024 16:06:22
+ Date: 14/09/2024 21:40:30
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for axis
+-- ----------------------------
+DROP TABLE IF EXISTS `axis`;
+CREATE TABLE `axis` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `x` int NOT NULL,
+  `y` int NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Table structure for users

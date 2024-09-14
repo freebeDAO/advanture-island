@@ -5,7 +5,7 @@ const sequelize = require('./src/server/db');
 // const responseHandler = require('./src/server/middle/responseHandler')
 const usersRouter = require('./src/server/controller/users');
 const auth = require('./src/server/controller/auth');
-
+const axisRouter = require('./src/server/controller/axis')
 
 const app = next({dev: process.env.NODE_ENV !== 'production'});
 const handle = app.getRequestHandler();
@@ -22,6 +22,7 @@ app.prepare().then(async () => {
     // server.use(responseHandler);
     server.use('/users', usersRouter);
     server.use('/auth', auth.router);
+    server.use('/axis', axisRouter);
     // 处理所有其他 Next.js 页面
     server.all('*', (req, res) => {  // 不要显式指定 Request 和 Response 的类型
         return handle(req, res);
