@@ -8,7 +8,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">冒险公会-任务</h1>
         <h2 className="text-2xl text-gray-400 border border-gray-300 p-2 w-full">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', border: '1px solid #ccc', "borderWidth": "1px", "borderRadius": "5px", "boxShadow": "0 2px 5px rgba(0,0,0,0.1)" }}>
-            <h1>跳</h1>
+            <h1>可跳动的组件</h1>
             <JumpableComponent />
           </div>
 

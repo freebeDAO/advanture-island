@@ -20,7 +20,7 @@ export default function Home() {
             position: 'relative',
             height: '300px'
           }}>
-            <h1>拖拽</h1>
+            <h1>拖拽组件</h1>
             <DraggerComponent />
           </div>
 
