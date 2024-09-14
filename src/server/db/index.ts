@@ -1,15 +1,24 @@
 import {Sequelize} from 'sequelize';
 const useModel = require('./models/users.model.ts')
-const port = process.env.NODE_ENV === 'production' ? 1234 : 3306;
-const user = process.env.NODE_ENV === 'production' ? 'xxx' : 'root';
-const pwd = process.env.NODE_ENV === 'production' ? 'xxx' : 'qtrade';
+// const port = process.env.NODE_ENV === 'production' ? 1234 : 3306;
+// const user = process.env.NODE_ENV === 'production' ? 'xxx' : 'root';
+// const pwd = process.env.NODE_ENV === 'production' ? 'xxx' : 'qtrade';
 // In a real app, you should keep the database connection URL as an environment variable.
 // But for this example, we will just use a local SQLite database.
 // const sequelize = new Sequelize(process.env.DB_CONNECTION_URL);
-const sequelize = new Sequelize('test', user, pwd, {
-    host: 'localhost',
+//
+// DB_HOST=localhost
+// DB_USER=root
+// DB_PASSWORD=yourpassword
+// DB_PORT=3306
+// DB_NAME=mydatabase
+const sequelize = new Sequelize(
+    process.env.DB_NAME as string || '',
+    process.env.DB_USER as string || '',
+    process.env.DB_PASSWORD as string || '', {
+    host: process.env.DB_HOST as string || '',
     dialect: 'mysql', // 或其他支持的数据库类型
-    port,
+    port: Number(process.env.DB_PORT as string),
     query: {
         raw: true,
     },
