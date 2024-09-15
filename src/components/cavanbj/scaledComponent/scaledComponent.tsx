@@ -11,7 +11,7 @@ interface ScaledComponentProps {
 }
 
 /**
- * CircleComponent 组件用于显示一个缩放的圆形。
+ * ScaledComponent 组件用于显示一个缩放的圆形。
  * @param children - 被缩放的对象，这里作为子元素
  * @param step - 缩放变化的比率
  * @param minScale - 最大放大倍数
