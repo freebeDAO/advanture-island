@@ -1,48 +1,58 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-
+interface ScaledComponentProps {
+  children: React.ReactNode;
+  step: number;
+  minScale: number;
+  maxScale: number;
+  overflowShowScrollBar: boolean;
+}
 
 /**
  * CircleComponent 组件用于显示一个缩放的圆形。
- * @param minRadius - 圆形的最小半径，默认为 5。
- * @param maxRadius - 圆形的最大半径。
+ * @param children - 被缩放的对象，这里作为子元素
+ * @param step - 缩放变化的比率
+ * @param minScale - 最大放大倍数
+ * @param maxScale - 最小缩小倍数
+ * @param overflowShowScrollBar - 超出父容器大小时是否显示滚动条
  */
-const CircleComponent: React.FC<CircleComponentProps> = ({minRadius, maxRadius}) => {
-  const [radius, setRadius] = useState<number>(50);
+const ScaledComponent: React.FC<ScaledComponentProps> = ({ children, step = 0.1, minScale = 0.1, maxScale = 10, overflowShowScrollBar = false }) => {
+  const [scale, setScale] = useState(1);
 
-  if (minRadius < 5) {
-    minRadius = 5
+  useEffect(() => {
+    const handleScroll = (event: WheelEvent) => {
+      if (event.deltaY > 0) {
+        setScale(scale + step > maxScale? maxScale: scale + step);
+      } else {
+        setScale(scale - step > minScale? scale - step : minScale);
+      }
+    };
+    window.addEventListener('wheel', handleScroll);
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [scale, step, minScale, maxScale, overflowShowScrollBar]);
+
+  let overflow = 'visible';
+  if (overflowShowScrollBar) {
+    overflow = 'auto'
   }
-  if (maxRadius < minRadius) {
-    maxRadius = minRadius
-  }
-
-  const increaseRadius = () => {
-    setRadius(Math.min(maxRadius, radius + 10));
-  };
-
-  const decreaseRadius = () => {
-    if (radius > minRadius) {
-      setRadius(Math.max(minRadius, radius - 10));
-    }
-  };
 
   return (
-    <div>
-      <svg width={radius * 2} height={radius * 2}>
-        <circle cx={radius} cy={radius} r={radius} fill="blue" />
-      </svg>
-      <button style={{ marginRight: '20px' }} onClick={increaseRadius}>+</button>
-      <button onClick={decreaseRadius}>-</button>
+    <div style={{ position: 'relative', display: 'inline-block', overflow: `${overflow}` }}>
+      <div
+        style={{
+          transform: `scale(${scale})`,
+          transformOrigin: 'center',
+          display: 'inline-block',
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };
 
-type CircleComponentProps = {
-  minRadius: number; // 最小半径
-  maxRadius: number; // 最大半径
-};
-
-export  default CircleComponent
+export default ScaledComponent;
