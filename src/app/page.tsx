@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import JumpableComponent from 'src/components/JumpableComponent';
+import StyleControlComponent from 'src/components/StyleControlComponent';
 
 export default function Home() {
   return (
@@ -6,8 +8,19 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
         <h1 className="text-4xl font-bold">冒险公会-任务</h1>
         {/* 替换成自己完成的任务演示组件 */}
-        <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-2 w-full">
-          添加任务组件用于展示
+        <h2 className="text-2xl h-100 text-gray-400 border border-gray-300 p-2 w-full">
+        StyleControlComponent
+          <div className="flex items-center gap-1">
+            <StyleControlComponent bg_color="red" sharp='circle' />
+            <StyleControlComponent bg_color="blue" sharp='rectangle' />
+            <StyleControlComponent bg_color="yellow" sharp='ellipse' />
+            <StyleControlComponent bg_color="black" sharp='rounded-rectangle' />
+            <StyleControlComponent bg_color="green" sharp='triangle' />
+          </div>
+          <br/>
+          JumpableComponent
+          <br/><br/>
+          <JumpableComponent />
         </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
