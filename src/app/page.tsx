@@ -1,14 +1,18 @@
 import Image from 'next/image';
+import Header from "src/components/header/Header";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
         <h1 className="text-4xl font-bold">冒险公会-任务</h1>
+        <Link href={'/test/hidden'} className={'text-blue-500 hover:text-blue-300'}>to /test/hidden(未登录不能访问)</Link>
+        <Header></Header>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://github.com/freebeDAO/advanture-island"
           target="_blank"
           rel="noopener noreferrer"
