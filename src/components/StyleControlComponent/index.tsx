@@ -21,10 +21,11 @@ interface IShapeInfo {
 	height: number;
 }
 
-const translateShapetoStyles = (shape: Shape, targetShape: IShapeInfo) => {
+const translateShapetoStyles = (shape: Shape, targetShape: IShapeInfo, borderWidth?: number) => {
 	const { width, height } = targetShape;
 
 	const shortLength = width > height ? height : width;
+	const longLength = width > height ? width : height;
 
 	switch (shape) {
 		case 'circle':
@@ -36,7 +37,20 @@ const translateShapetoStyles = (shape: Shape, targetShape: IShapeInfo) => {
 		case 'rounded-rectangle':
 			return { borderRadius: shortLength / 2 };
 		case 'triangle':
-			return { width: shortLength, height: shortLength, 'clip-path': ' polygon(50% 0%, 0% 100%, 100% 100%)' };
+			return {
+				width: longLength,
+				height: longLength,
+				'clip-path': `polygon(50% ${100 - 50 * Math.sqrt(2)}%, 0% 100%, 100% 100%)`,
+			};
+		case 'triangle-inner': {
+			return {
+				width: longLength - (borderWidth || 0),
+				height: longLength - (borderWidth || 0),
+				marginTop: (borderWidth || 0) / Math.sqrt(2),
+				marginLeft: (borderWidth || 0) / 2,
+				'clip-path': `polygon(50% ${100 - 50 * Math.sqrt(2)}%, 0% 100%, 100% 100%)`,
+			};
+		}
 		default:
 			return {};
 	}
@@ -86,13 +100,13 @@ const StyleControlComponent: FC<IProps> = ({ children }) => {
 				height,
 			});
 		}
-	}, [targetRef.current]);
+	}, []);
 
 	const handleChange = (type: string) => (value: string | number) => setData((pre) => ({ ...pre, [type]: value }));
 
 	return (
-		<div>
-			<Form.Root className='mx-auto w-96 mb-8'>
+		<div className='w-[900px] flex items-center justify-between'>
+			<Form.Root className='w-96'>
 				<FormItem name='shape' label='形状'>
 					<RadioItem
 						dataSource={[
@@ -110,7 +124,7 @@ const StyleControlComponent: FC<IProps> = ({ children }) => {
 					<ColorInput value={data.backgroundColor} onChange={handleChange('backgroundColor')} />
 				</FormItem>
 				<FormItem name='borderWidth' label='边框大小'>
-					<SliderItem min={0} max={20} step={1} defaultValue={0} onChange={handleChange('borderWidth')} />
+					<SliderItem min={0} max={50} step={1} defaultValue={0} onChange={handleChange('borderWidth')} />
 				</FormItem>
 				<FormItem name='borderColor' label='边框颜色'>
 					<ColorInput value={data.borderColor} onChange={handleChange('borderColor')} />
@@ -144,18 +158,38 @@ const StyleControlComponent: FC<IProps> = ({ children }) => {
 			</Form.Root>
 			{cloneElement(children, {
 				ref: targetRef,
-				className: `${children.props.className || ''} ${translatePositionToCls(data.textPosition)}`,
+				className: `${children.props.className || ''} ${data.shape !== 'triangle' ? translatePositionToCls(data.textPosition) : ''}`,
 				style: {
 					...(children.props.style || {}),
 					position: 'relative',
-					backgroundColor: data.backgroundColor,
-					borderColor: data.borderColor,
-					borderWidth: `${data.borderWidth}px`,
+					backgroundColor: data.shape === 'triangle' ? data.borderColor : data.backgroundColor,
+					...(data.shape !== 'triangle'
+						? {
+								borderColor: data.borderColor,
+								borderWidth: `${data.borderWidth}px`,
+						  }
+						: {}),
 					fontSize: `${data.fontSize}px`,
 					color: data.color,
 					...translateShapetoStyles(data.shape, targetShape),
 				},
-				children: data.content,
+				children:
+					data.shape === 'triangle' ? (
+						<div
+							className={translatePositionToCls(data.textPosition)}
+							style={{ background: data.backgroundColor, ...translateShapetoStyles('triangle-inner', targetShape, data.borderWidth) }}
+						>
+							<span
+								style={{
+									marginTop: (targetShape.width > targetShape.height ? targetShape.width : targetShape.height) * (Math.sqrt(2) - 1),
+								}}
+							>
+								{data.content}
+							</span>
+						</div>
+					) : (
+						data.content
+					),
 			})}
 		</div>
 	);

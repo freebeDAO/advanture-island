@@ -1,4 +1,4 @@
-export type Shape = 'circle' | 'ellipse' | 'rectangle' | 'rounded-rectangle' | 'triangle';
+export type Shape = 'circle' | 'ellipse' | 'rectangle' | 'rounded-rectangle' | 'triangle' | 'triangle-inner';
 
 export type TextPosition = 'tl' | 'tc' | 'tr' | 'ml' | 'mc' | 'mr' | 'bl' | 'bc' | 'br';
 
