@@ -1,71 +1,103 @@
-import pool from "../lib/dbPool";
-import { Node } from "src/models/Node";
-import { ResultSetHeader } from "mysql2";
-import { RowDataPacket } from "mysql2";
+import { Node } from "../entity/Node";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, EntityManager, IsNull } from 'typeorm';
 
-export async function SaveNode(node: Node) {
-    const connection = await pool.getConnection();
-    try {
-        await connection.beginTransaction();
-        const [result] = await connection.query<ResultSetHeader>('INSERT INTO Node (x, y) VALUES (?, ?)', [node.x, node.y]);
-        await connection.commit();
-        return result.insertId
-    } catch (error) {
-        await connection.rollback();
-        console.log("error: " + error);
-    } finally {
-        connection.release();
-    }
-    return null;
-}
+const buildMessage = (status: number, message: string, result?: Node) => {
+    return { status, message, result };
+};
 
-export async function DeleteNodeById(id: number) {
-    const connection = await pool.getConnection();
-    try {
-        await connection.beginTransaction();
-        const [result] = await connection.query<ResultSetHeader>('DELETE FROM Node WHERE ID = ?', id);
-        await connection.commit();
-        const count = result.affectedRows;
-        if (count == 1) {
-            return "success";
+@Injectable()
+export class NodeService {
+    constructor(
+        @InjectRepository(Node)
+        private nodeRepository: Repository<Node>,
+    ) { }
+
+    async findNodeById(id: number): Promise<{ status: number; message: string; result?: Node }> {
+        const result = await this.nodeRepository.findOneBy({ id });
+        if (result) {
+            return buildMessage(200, 'Node found!', result);
+        } else {
+            return buildMessage(201, 'Node not found!');
         }
-    } catch (error) {
-        await connection.rollback();
-        console.log("error: " + error);
-    } finally {
-        connection.release();
     }
-    return "failed";
-}
 
-export async function ModifyNodeById(node: Node) {
-    const connection = await pool.getConnection();
-    try {
-        await connection.beginTransaction();
-        const [result] = await connection.query<ResultSetHeader>('UPDATE Node SET x=?,y=? WHERE ID = ?', [node.x, node.y, node.id]);
-        await connection.commit();
-        const count = result.affectedRows;
-        if (count == 1) {
-            return "success";
-        }
-    } catch (error) {
-        await connection.rollback();
-        console.log("error: " + error);
-    } finally {
-        connection.release();
+    async findNodes(): Promise<Node[]> {
+        const result = await this.nodeRepository.find({
+            order: {
+                id: "ASC"
+            }
+        });
+        return result;
     }
-}
 
-export async function GetNodeById(id: number) {
-    const connection = await pool.getConnection();
-    try {
-        const [rows] = await connection.query<RowDataPacket[]>('SELECT * FROM Node WHERE ID = ?', id);
-        if (rows.length > 0) {
-            return rows
+    async createNode(node: Partial<Node>): Promise<{ status: number; message: string; result?: Node }> {
+        try {
+            const result = await this.nodeRepository.manager.transaction(async (manager: EntityManager) => {
+                delete node.id;
+                const savedNode = await manager.save(Node, node);
+                return savedNode;
+            });
+            console.log('Transaction committed successfully');
+            return buildMessage(200, 'Node created!', result);
+        } catch (error) {
+            console.error('Transaction failed:', error);
+            return buildMessage(500, 'Error creating node!');
         }
-    } catch (error) {
-        console.log("error: " + error);
-    } finally {
-        connection.release();
+    }
+
+    async deleteNodeById(node: Partial<Node>): Promise<{ status: number; message: string; result?: Node }> {
+        try {
+            const result = await this.nodeRepository.manager.transaction(async (manager: EntityManager) => {
+                const deleteNode = await manager.delete(Node, { id: node.id });
+                return deleteNode;
+            });
+            if (1 == result.affected) {
+                console.log('Transaction committed successfully');
+                return buildMessage(200, 'Node delete!');
+            } else {
+                return buildMessage(202, 'Node not found!');
+            }
+        } catch (error) {
+            console.error('Transaction failed:', error);
+            return buildMessage(500, 'Delete node error!');
+        }
+    }
+
+    async updateNode(node: Partial<Node>): Promise<{ status: number; message: string; result?: Node }> {
+        try {
+            const result = await this.nodeRepository.manager.transaction(async (manager: EntityManager) => {
+                const savedNode = await manager.update(Node, node.id, node);
+                return savedNode;
+            });
+            if (1 == result.affected) {
+                console.log('Transaction committed successfully');
+                return buildMessage(200, 'Node updated!');
+            } else {
+                return buildMessage(203, 'Node not found!');
+            }
+        } catch (error) {
+            console.error('Transaction failed:', error);
+            return buildMessage(500, 'Update node error!');
+        }
+    }
+
+    async updaterNode(node: Partial<Node>): Promise<{ status: number; message: string; result?: Node }> {
+        try {
+            const result = await this.nodeRepository.manager.transaction(async (manager: EntityManager) => {
+                const oldNode = await manager.findOneBy(Node, { id: node.id });
+                if (!oldNode) {
+                    delete node.id;
+                }
+                const savedNode = await manager.save(Node, node);
+                return savedNode;
+            });
+            console.log('Transaction committed successfully');
+            return buildMessage(200, 'Node saved or updated!', result);
+        } catch (error) {
+            console.error('Transaction failed:', error);
+            return buildMessage(500, 'Update node error!');
+        }
     }
 }

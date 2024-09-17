@@ -6,9 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:server": "ts-node src/main.ts"
   },
   "dependencies": {
+    "@nestjs/common": "^10.4.1",
+    "@nestjs/core": "^10.4.1",
+    "@nestjs/platform-express": "^10.4.2",
+    "@nestjs/typeorm": "^10.0.2",
     "@radix-ui/react-avatar": "^1.1.0",
     "clsx": "^2.1.1",
     "install": "^0.13.0",
@@ -18,7 +23,11 @@
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.5.2"
+    "reflect-metadata": "^0.2.2",
+    "tailwind-merge": "^2.5.2",
+    "ts-loader": "^9.5.1",
+    "typeorm": "^0.3.20",
+    "typeorm-transactional": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -28,6 +37,8 @@
     "eslint-config-next": "14.2.9",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.1",
     "typescript": "^5"
   }
 }

@@ -1,14 +1,22 @@
 "use client";
 import { useState, useEffect } from 'react';
 
-const JumpableComponent = () => {
+interface Jumpable {
+  children: React.ReactNode;
+  className?: string;
+  jumpDistance?: number;
+  jumpDuration?: number;
+  boxSize?: number;
+}
+
+const JumpableComponent: React.FC<Jumpable> = ({ children, className = '', jumpDistance = -50, jumpDuration = 600, boxSize = 50 }) => {
   const [isJumping, setIsJumping] = useState(false);
 
   const handleJump = () => {
     setIsJumping(true);
     setTimeout(() => {
       setIsJumping(false);
-    }, 500);
+    }, jumpDuration);
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -27,22 +35,15 @@ const JumpableComponent = () => {
 
   return (
     <div
-      className={`jumpable ${isJumping ? 'jump' : ''}`}
+      className={`${className}`}
       style={{
-        width: '100px',
-        height: '100px',
-        backgroundColor: 'lightblue',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '20px',
-        transition: 'transform 0.5s',
-        transform: isJumping ? 'translateY(-50px)' : 'translateY(0)',
-        cursor: 'pointer',
+        width: `${boxSize}px`,
+        height: `${boxSize}px`,
+        transform: isJumping ? 'translateY(' + jumpDistance + 'px)' : 'translateY(0)',
       }}
       onClick={handleJump}
     >
-      跳
+      {children}
     </div>
   );
 };

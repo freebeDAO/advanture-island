@@ -1,40 +1,57 @@
-"use client"
+"use client";
 import { useState } from 'react';
 
-const ScaledComponent = () => {
+interface Scale {
+  children: React.ReactNode;
+  className?: string;
+  stepQuantity?: number;
+  maxSize?: number;
+  minSize?: number;
+  initBoxSize?: number;
+}
+
+const ScaledComponent: React.FC<Scale> = ({
+  children,
+  className = "",
+  initBoxSize = 20,
+  stepQuantity = 0.1,
+  maxSize = 10,
+  minSize = 0.5,
+}) => {
   const [scale, setScale] = useState(1);
 
-  const handleZoomIn = () => {
-    setScale((prevScale) => Math.min(prevScale + 0.1, 2)); 
+  const handleZoomOut = () => {
+    setScale((prevScale) => Math.min(prevScale + stepQuantity, maxSize));
   };
 
-  const handleZoomOut = () => {
-    setScale((prevScale) => Math.max(prevScale - 0.1, 0.5));
+  const handleZoomIn = () => {
+    setScale((prevScale) => Math.max(prevScale - stepQuantity, minSize));
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className={`flex flex-col m-5 ${className} items-center justify-center`}>
+      <div className="bg-green-100 shadow-md rounded-lg p-4 transition-transform duration-500 cursor-pointer flex space-x-4"
+        style={{ marginBottom: `${Math.max(20, (scale - 1) * initBoxSize)}px` }}>
+        <button onClick={handleZoomOut}>
+          放大
+        </button>
+        <button onClick={handleZoomIn}>
+          缩小
+        </button>
+      </div>
       <div
+        id="123"
+        className='bg-blue-100 shadow-md rounded-lg p-4 transition-transform duration-500 cursor-pointer my-auto flex items-center justify-center'
         style={{
-          width: '100px',
-          height: '100px',
-          backgroundColor: 'lightcoral',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          margin: '20px auto',
+          width: `${initBoxSize}px`,
+          height: `${initBoxSize}px`,
           transform: `scale(${scale})`,
           transition: 'transform 0.3s',
+          fontSize: `${initBoxSize / 20}vw`
         }}
       >
-        <p style={{ color: 'white' }}>盒子</p>
+        {children}
       </div>
-      <button onClick={handleZoomIn} style={{ marginRight: '10px' }}>
-        放大
-      </button>
-      <button onClick={handleZoomOut}>
-        缩小
-      </button>
     </div>
   );
 };
