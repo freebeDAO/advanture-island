@@ -23,6 +23,7 @@ const MovableComponent: React.FC<Movable> = ({
 }) => {
     const [node, setNode] = useState<{ x: number; y: number, id: number }>(initNode);
     const [direction, setDirection] = useState<{ dx: number; dy: number }>(intDirection);
+    intSpeed = intSpeed > maxSpeed ? maxSpeed : intSpeed
     const [speed, setSpeed] = useState(intSpeed);
     const containerRef = useRef<HTMLDivElement>(null);
     const sideLengthHalf = Math.round(sideLength / 2);
