@@ -11,9 +11,13 @@ export default function Home() {
         {/* 替换成自己完成的任务演示组件 */}
         <h2 className=" h-80 text-gray-400 border border-gray-300 p-2 w-full">
         <JumpableComponent />
+        <p className='flex flex-col justify-center items-center '>点击或空格可跳动组件</p>
         <LoginWithMetaMask/>
         <div className="relative w-full h-screen">
-      <MovableComponent nodeId={1}/>
+        <div>
+      <h1 className="text-center text-2xl font-bold mb-4">Test Movable Component</h1>
+      <MovableComponent id={1} initialX={100} initialY={100} />
+    </div>
     </div>
         <p className='flex flex-auto items-center justify-center'>点击或空格可跳动组件</p>
         </h2>
