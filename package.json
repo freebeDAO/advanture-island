@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.0",
+    "axios": "^1.7.7",
     "clsx": "^2.1.1",
+    "mysql2": "^3.11.2",
     "next": "14.2.9",
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
     "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
