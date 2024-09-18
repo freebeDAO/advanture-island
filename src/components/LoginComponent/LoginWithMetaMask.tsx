@@ -56,15 +56,15 @@ const LoginWithMetaMask = () => {
             onClick={connectWallet}
             className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition-colors"
           >
-            Connect MetaMask
+            连接 MetaMask
           </button>
         ) : (
           <div>
-            <p className="text-center text-gray-700 mb-4">Connected account: <span className="font-semibold">{account}</span></p>
+            <p className="text-center text-gray-700 mb-4">已链接钱包: <span className="max-w-full whitespace-normal overflow-wrap break-words font-semibold">{account}</span></p>
             <div className="mb-4">
               <input
                 type="text"
-                placeholder="Enter your nickname"
+                placeholder="Enter your nickname/请输入用户名"
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -73,7 +73,7 @@ const LoginWithMetaMask = () => {
             <div className="mb-4">
               <input
                 type="text"
-                placeholder="Enter avatar URL"
+                placeholder="Enter avatar URL/请输入头像链接"
                 value={avatar}
                 onChange={(e) => setAvatar(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -83,7 +83,7 @@ const LoginWithMetaMask = () => {
               onClick={handleSubmit}
               className="w-full px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition-colors"
             >
-              Submit
+              提交保存
             </button>
           </div>
         )}
