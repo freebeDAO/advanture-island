@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -46,32 +47,47 @@ const LoginWithMetaMask = () => {
   };
 
   return (
-    <div>
-      <h1>Login with MetaMask</h1>
-      {!account ? (
-        <button onClick={connectWallet}>Connect MetaMask</button>
-      ) : (
-        <div>
-          <p>Connected account: {account}</p>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-50 p-4">
+      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">Login with MetaMask</h1>
+
+        {!account ? (
+          <button
+            onClick={connectWallet}
+            className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition-colors"
+          >
+            Connect MetaMask
+          </button>
+        ) : (
           <div>
-            <input
-              type="text"
-              placeholder="Enter your nickname"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-            />
+            <p className="text-center text-gray-700 mb-4">Connected account: <span className="font-semibold">{account}</span></p>
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Enter your nickname"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Enter avatar URL"
+                value={avatar}
+                onChange={(e) => setAvatar(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="w-full px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition-colors"
+            >
+              Submit
+            </button>
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder="Enter avatar URL"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-            />
-          </div>
-          <button onClick={handleSubmit}>Submit</button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
