@@ -1,15 +1,21 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
+import { User } from '../models/User';
 
-// 创建连接池
-const sequelize = new Sequelize('adventure', 'root', '', {
-  host: 'localhost', // 根据你的 MySQL 主机配置
+const sequelize = new Sequelize({
   dialect: 'mysql',
-  pool: {
-    max: 5, // 最大连接数
-    min: 0,
-    acquire: 30000, // 连接超时
-    idle: 10000 // 空闲连接保持时间
-  }
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  models: [User],
 });
-
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  .catch((err: any) => {
+    console.error('Unable to connect to the database:', err);
+  });
 export default sequelize;
