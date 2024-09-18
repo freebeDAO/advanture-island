@@ -1,6 +1,8 @@
 import React from 'react';
 import LoginWithMetaMask from 'src/components/LoginComponent/LoginWithMetaMask';
-
+/*
+ * weixin: wchen446352746，任务：测试任务 钱包登录
+ */
 const MetaMaskLoginDemo = () => {
   return (
     <div>
