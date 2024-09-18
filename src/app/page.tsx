@@ -1,13 +1,16 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
-        <h1 className="text-4xl font-bold">冒险公会-任务</h1>
+        <h1 className="text-4xl font-bold mb-4">冒险公会-任务</h1>
         {/* 替换成自己完成的任务演示组件 */}
-        <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-2 w-full">
-          添加任务组件用于展示
+        <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-4 w-full flex flex-col gap-4">
+          <Link href="/demo/scaled" className="hover:text-blue-500">缩放组件</Link>
+          <Link href="/demo/draggable" className="hover:text-blue-500">拖拽组件</Link>
+          <Link href="/demo/style-ctrl" className="hover:text-blue-500">样式控制组件</Link>
         </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
