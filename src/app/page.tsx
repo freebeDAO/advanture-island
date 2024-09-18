@@ -13,17 +13,7 @@ export default function Home() {
         <JumpableComponent />
         <LoginWithMetaMask/>
         <div className="relative w-full h-screen">
-      <MovableComponent
-        initialX={100}
-        initialY={100}
-        width={100}
-        height={100}
-        moveDirection="right"
-        moveSpeed={200}
-      >
-        {/* Render any child component or element here */}
-        <div className="bg-red-500 w-full h-full flex items-center justify-center text-white">Movable</div>
-      </MovableComponent>
+      <MovableComponent nodeId={1}/>
     </div>
         <p className='flex flex-auto items-center justify-center'>点击或空格可跳动组件</p>
         </h2>
