@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import JumpableComponent from 'src/components/JumpableComponent';
+import LoginWithMetaMask from 'src/components/LoginComponent/LoginWithMetaMask';
+import MovableComponent from 'src/components/MovableComponent/Movable';
 
 export default function Home() {
   return (
@@ -9,6 +11,20 @@ export default function Home() {
         {/* 替换成自己完成的任务演示组件 */}
         <h2 className=" h-80 text-gray-400 border border-gray-300 p-2 w-full">
         <JumpableComponent />
+        <LoginWithMetaMask/>
+        <div className="relative w-full h-screen">
+      <MovableComponent
+        initialX={100}
+        initialY={100}
+        width={100}
+        height={100}
+        moveDirection="right"
+        moveSpeed={200}
+      >
+        {/* Render any child component or element here */}
+        <div className="bg-red-500 w-full h-full flex items-center justify-center text-white">Movable</div>
+      </MovableComponent>
+    </div>
         <p className='flex flex-auto items-center justify-center'>点击或空格可跳动组件</p>
         </h2>
       </main>

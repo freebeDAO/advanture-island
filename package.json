@@ -12,6 +12,7 @@
     "@radix-ui/react-avatar": "^1.1.0",
     "axios": "^1.7.7",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.5.4",
     "mysql2": "^3.11.3",
     "next": "14.2.9",
     "radix-ui": "^1.0.1",
