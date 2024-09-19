@@ -28,6 +28,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"],
+    ".next/types/**/*.ts", "src/tests/addNode.test.js"],
   "exclude": ["node_modules"]
 }
