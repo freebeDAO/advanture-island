@@ -2,12 +2,12 @@
  * @Author: liliang
  * @Date: 2024-09-20 18:42:12
  * @LastEditors: liliang
- * @LastEditTime: 2024-09-20 18:55:36
- * @FilePath: /advanture-island/src/components/test/ScaleComponentDemo.tsx
+ * @LastEditTime: 2024-09-21 01:09:17
+ * @FilePath: /advanture-island/src/app/test/ScaleComponentDemo.tsx
  * @Description: 
  */
 import React from 'react';
-import ScaledComponent from '../component/ScaledComponent';
+import ScaledComponent from '../../components/component/ScaledComponent';
 
 const ScaleComponentDemo = () => {
   return (
