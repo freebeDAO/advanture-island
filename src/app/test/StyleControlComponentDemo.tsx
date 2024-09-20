@@ -2,12 +2,12 @@
  * @Author: liliang
  * @Date: 2024-09-20 19:13:57
  * @LastEditors: liliang
- * @LastEditTime: 2024-09-21 00:44:59
- * @FilePath: /advanture-island/src/components/test/StyleControlComponentDemo.tsx
+ * @LastEditTime: 2024-09-21 01:03:46
+ * @FilePath: /advanture-island/src/app/test/StyleControlComponentDemo.tsx
  * @Description: 
  */
 import React, { useState } from 'react';
-import StyleControlComponent from '../component/StyleControlComponent';
+import StyleControlComponent from '../../components/component/StyleControlComponent';
 import  './style.scss'
 
 const StyleControlComponentDemo = () => {
