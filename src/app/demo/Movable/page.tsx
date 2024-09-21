@@ -3,13 +3,21 @@ import MovableComponent from "src/components/MovableComponent/Movable";
 /*
  * weixin: wchen446352746，任务：测试任务 移动模块
  */
-const TestMovable = () => {
+const DemoPage = () => {
   return (
-    <div>
-      <h1 className="text-center text-2xl font-bold mb-4">这是一个可自由移动的 也可以鼠标点击移动或键盘操作的demo 默认初始坐标为100*100</h1>
-      <MovableComponent id={1} initialX={100} initialY={100} />
+    <div className="w-full h-screen bg-black">
+      <p className='h-1'>模块移动demo,可键盘操作人物移动</p>
+      <MovableComponent
+        id={1}
+        initialX={20}              // 初始 X 坐标
+        initialY={240}              // 初始 Y 坐标
+        characterSprite="/characters/orc1_walk_full.png" // 精灵图路径
+        frameWidth={160}             // 每帧的宽度
+        frameHeight={170}            // 每帧的高度
+        backgroundImg="/characters/game_background_2.png" // 背景图片路径
+      />
     </div>
   );
 };
 
-export default TestMovable;
+export default DemoPage;
