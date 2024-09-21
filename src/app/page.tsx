@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import JumpableComponent from 'src/components/JumpableComponent';
 import LoginWithMetaMask from 'src/components/LoginComponent/LoginWithMetaMask';
-import MovableComponent from 'src/components/MovableComponent/Movable';
+// import MovableComponent from 'src/components/MovableComponent/Movable';
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         <div className="relative w-full h-screen">
         <div>
       <h1 className="text-center text-2xl font-bold mb-4">Test Movable Component</h1>
-      <MovableComponent id={1} initialX={100} initialY={100} />
+      {/* <MovableComponent id={1} initialX={100} initialY={100} /> */}
     </div>
     </div>
         <p className='flex flex-auto items-center justify-center'>点击或空格可跳动组件</p>

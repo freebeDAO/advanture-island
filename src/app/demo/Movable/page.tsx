@@ -6,7 +6,7 @@ import MovableComponent from "src/components/MovableComponent/Movable";
 const DemoPage = () => {
   return (
     <div className="w-full h-screen bg-black">
-      <p className='h-1'>模块移动demo,可键盘操作人物移动</p>
+      <p className='h-1'>模块移动demo,可键盘操作任务</p>
       <MovableComponent
         id={1}
         initialX={20}              // 初始 X 坐标

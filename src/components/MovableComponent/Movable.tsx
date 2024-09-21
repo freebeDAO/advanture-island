@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, px } from 'framer-motion';
 import axios from 'axios';
 
@@ -22,10 +22,11 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ id, initialX, initi
   const [direction, setDirection] = useState<Direction>('down'); // 默认方向
   const [frameIndex, setFrameIndex] = useState(0); // 动画帧索引
   const [moving, setMoving] = useState(false); // 是否正在移动
-  const patrolInterval = 100;  // 自动巡逻移动的间隔时间
+  const patrolInterval = 1000;  // 自动巡逻移动的间隔时间
  const [isPatrolling, setIsPatrolling] = useState(false);  // 自动巡逻开关
-  const [isMoving, setIsMoving] = useState({ up: false, down: false, left: false, right: false });  // 虚拟键盘控制
 
+ const stepDistance = 35;  // 巡逻每次移动的步幅较小，提升平滑性 
+ 
   const directions: Record<Direction, number> = {
     down: 0,
     up: 1,
@@ -76,6 +77,41 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ id, initialX, initi
       return () => clearInterval(frameInterval);
     }
   }, [moving]);
+
+  // 巡逻功能
+  useEffect(() => {
+    if (isPatrolling) {
+      setMoving(true); // 保持动画移动状态
+      const patrolMovement = setInterval(() => {
+        const randomDirection: Direction = ['up', 'down', 'left', 'right'][Math.floor(Math.random() * 4)] as Direction;
+        let deltaX = 0;
+        let deltaY = 0;
+
+        switch (randomDirection) {
+          case 'up':
+            deltaY = -stepDistance;
+            break;
+          case 'down':
+            deltaY = stepDistance;
+            break;
+          case 'left':
+            deltaX = -stepDistance;
+            break;
+          case 'right':
+            deltaX = stepDistance;
+            break;
+        }
+
+        setDirection(randomDirection);
+        updatePositionInDB(x + deltaX, y + deltaY);
+      }, patrolInterval);
+
+      return () => {
+        setMoving(false); // 停止巡逻时停止动画
+        clearInterval(patrolMovement);
+      };
+    }
+  }, [isPatrolling, x, y, updatePositionInDB]);
 
   // 键盘控制移动
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
@@ -136,22 +172,31 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ id, initialX, initi
 
     switch (direction) {
       case 'up':
+    
         deltaY = -10;
+        setDirection('up');
         break;
       case 'down':
         deltaY = 10;
+        setDirection('down');
         break;
       case 'left':
         deltaX = -10;
+        setDirection('left');
         break;
       case 'right':
         deltaX = 10;
+        setDirection('right');
         break;
+      default:
+        setMoving(false);
+        return;
     }
 
     setDirection(direction);
     updatePositionInDB(x + deltaX, y + deltaY);
   };
+
 
   return (
     <div className="relative w-screen h-screen bg-gray-100">
@@ -174,11 +219,15 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ id, initialX, initi
 
       {/* 虚拟键盘 */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-4">
-        <button onClick={() => handleVirtualKey('up')} className="bg-green-400 p-2 rounded">↑</button>
-        <button onClick={() => handleVirtualKey('left')} className="bg-gray-300 p-2 rounded">←</button>
-        <button onClick={() => handleVirtualKey('down')} className="bg-gray-300 p-2 rounded">↓</button>
-        <button onClick={() => handleVirtualKey('right')} className="bg-gray-300 p-2 rounded">→</button>
+        <button onMouseDown={() => handleVirtualKey('up')} onMouseUp={() => setMoving(false)} className="bg-gray-300 p-2 rounded">↑</button>
+        <button onMouseDown={() => handleVirtualKey('left')} onMouseUp={() => setMoving(false)} className="bg-gray-300 p-2 rounded">←</button>
+        <button onMouseDown={() => handleVirtualKey('down')} onMouseUp={() => setMoving(false)} className="bg-gray-300 p-2 rounded">↓</button>
+        <button onMouseDown={() => handleVirtualKey('right')} onMouseUp={() => setMoving(false)} className="bg-gray-300 p-2 rounded">→</button>
       </div>
+         {/* 自动巡逻开关 */}
+         <button onClick={() => setIsPatrolling(!isPatrolling)} className="absolute top-10 left-10 bg-blue-400 p-2 rounded">
+         {isPatrolling ? '停止巡逻' : '开始自动巡逻'}
+      </button>
     </div>
   );
 };
