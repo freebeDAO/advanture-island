@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, px } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 
 type MovableComponentProps = {
@@ -55,7 +55,7 @@ const MovableComponent: React.FC<MovableComponentProps> = ({ id, initialX, initi
   const updatePositionInDB = useCallback(async (newX: number, newY: number) => {
     const { clampedX, clampedY } = clampPosition(newX, newY);
     try {
-      await axios.put('/api/node', { id, x: clampedX, y: clampedY });
+      await axios.post('/api/node', { id, x: clampedX, y: clampedY });
       setX(clampedX);
       setY(clampedY);
     } catch (error) {
