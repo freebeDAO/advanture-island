@@ -1,0 +1,13 @@
+# signup
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "nickname": "test",
+  "address": "0x1234567890123456789012345678901234567890",
+  "avatar": "https://example.com/avatar.png"
+}
+
+# find user
+GET http://localhost:3000/api/user/0x1234567890123456789012345678901234567890
+Content-Type: application/json
