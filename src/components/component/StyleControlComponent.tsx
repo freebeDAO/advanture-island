@@ -1,11 +1,3 @@
-/*
- * @Author: liliang
- * @Date: 2024-09-20 19:13:18
- * @LastEditors: liliang
- * @LastEditTime: 2024-09-24 01:10:03
- * @FilePath: /advanture-island/src/components/component/StyleControlComponent.tsx
- * @Description: 
- */
 import React, { CSSProperties } from 'react';
 
 interface StyleControlComponentProps {
@@ -42,12 +34,12 @@ const StyleControlComponent: React.FC<StyleControlComponentProps> = ({
         return { borderRadius: '15px' };
       case 'triangle':
         return {
-          width: 0,
-          height: 0,
-          borderLeft: '50px solid transparent',
-          borderRight: '50px solid transparent',
-          borderBottom: `100px solid ${backgroundColor}`,
-          backgroundColor: 'transparent',
+          width: '150px',
+          height: '150px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'transparent', // 透明背景，便于显示SVG
         };
       default:
         return {};
@@ -84,15 +76,26 @@ const StyleControlComponent: React.FC<StyleControlComponentProps> = ({
         overflow: 'hidden',
       }}
     >
-      <span
-        style={{
-          fontSize: `${fontSize}px`,
-          color: fontColor,
-          textAlign: 'center',
-        }}
-      >
-        {text}
-      </span>
+      {shape === 'triangle' ? (
+        <svg width="150" height="150" viewBox="-20 -20 140 140" preserveAspectRatio="xMidYMid meet">
+          <polygon
+            points="50,0 0,86.6 100,86.6"
+            stroke={borderColor}          // 动态设置边框颜色
+            strokeWidth={borderSize}      // 动态设置边框宽度
+            fill={backgroundColor}        // 动态设置背景色
+          />
+        </svg>
+      ) : (
+        <span
+          style={{
+            fontSize: `${fontSize}px`,
+            color: fontColor,
+            textAlign: 'center',
+          }}
+        >
+          {text}
+        </span>
+      )}
     </div>
   );
 };
