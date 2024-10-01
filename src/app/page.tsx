@@ -1,14 +1,27 @@
 import Image from 'next/image';
-
+import JumpableComponent from 'src/components/JumpableComponent';
+import DraggableComponent from 'src/components/DraggableComponent';
+import ScaledComponent from 'src/components/ScaledComponent';
 export default function Home() {
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
         <h1 className="text-4xl font-bold">冒险公会-任务</h1>
         {/* 替换成自己完成的任务演示组件 */}
-        <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-2 w-full">
+        {/* <h2 className="text-2xl h-80 text-gray-400 border border-gray-300 p-2 w-full">
           添加任务组件用于展示
-        </h2>
+        </h2> */}
+        
+        <div>JumpableComponent 可跳动的组件</div>
+        <JumpableComponent content='可跳动组件'/>
+        <div>DraggableComponent 可拖动组件</div>
+        <DraggableComponent content='可拖动组件'/>
+        <div>ScaledComponent 可缩放组件</div>
+        <ScaledComponent content='缩放组件'/>
+
+
+
+        
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
         <a
