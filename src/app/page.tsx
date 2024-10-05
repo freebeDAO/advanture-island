@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import JumpableComponent from 'src/components/JumpableComponent';
-import DraggableComponent from 'src/components/DraggableComponent';
-import ScaledComponent from 'src/components/ScaledComponent';
-export default function Home() {
+import DraggableDemo from '@/test/demo/DraggableDemo';
+import MovavableDemo from '@/test/demo/MovableDemo';
+import ScaledComponent from 'src/components/ScaledComponent';export default function Home() {
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
@@ -15,12 +15,14 @@ export default function Home() {
         <div>JumpableComponent 可跳动的组件</div>
         <JumpableComponent content='可跳动组件'/>
         <div>DraggableComponent 可拖动组件</div>
-        <DraggableComponent content='可拖动组件'/>
+        <DraggableDemo />
         <div>ScaledComponent 可缩放组件</div>
         <ScaledComponent content='缩放组件'/>
-
-
-
+        
+        <div>MovableComponent 可移动组件</div>
+        <MovavableDemo initX={100} initY={150} initSpeed={50}/>
+      
+        
         
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
