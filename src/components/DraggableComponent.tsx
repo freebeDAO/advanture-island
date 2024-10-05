@@ -14,7 +14,8 @@ const defaultProps: Partial<DraggableProps> = {
 
 const DraggableComponent: React.FC<DraggableProps> = (props: DraggableProps) => {
   const { children, parentRef, width, height } = { ...defaultProps, ...props };
-  const [isDragging, setIsDragging] = useState(false);
+  // const [isDragging, setIsDragging] = useState(false);
+  let isDragging = false;
   const dragRef = useRef(null);
   // const parentRef = useRef(null);
   const offset = useRef({ x: 0, y: 0 });
@@ -24,10 +25,13 @@ const DraggableComponent: React.FC<DraggableProps> = (props: DraggableProps) => 
       // console.log('handleMouseDown');
       offset.current.x = dragRef.current?.offsetLeft - e.clientX;
       offset.current.y = dragRef.current?.offsetTop - e.clientY;
-      setIsDragging(true);
+      // setIsDragging(true);
+      isDragging = true;
     };
 
     const handleMouseMove = (e: MouseEvent) => {
+      // console.log(e.clientX,e.clientY);
+      // console.log(parentRef.current.offsetLeft,parentRef.current.offsetTop);
       if (isDragging) {
         const newX = e.clientX + offset.current.x;
         const newY = e.clientY + offset.current.y;
@@ -49,12 +53,19 @@ const DraggableComponent: React.FC<DraggableProps> = (props: DraggableProps) => 
     };
 
     const handleMouseUp = () => {
-      setIsDragging(false);
+      // setIsDragging(false);
+      isDragging = false;
+    };
+
+    const handleMouseLeave = () => {
+      // setIsDragging(false);
+      isDragging = false;
     };
 
     dragRef.current.addEventListener('mousemove', handleMouseMove);
     dragRef.current.addEventListener('mouseup', handleMouseUp);
     dragRef.current.addEventListener('mousedown', handleMouseDown);
+    dragRef.current.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       // dragRef.current.removeEventListener('mousemove', handleMouseMove);
