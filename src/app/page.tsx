@@ -1,8 +1,16 @@
+'use client'
 import Image from 'next/image';
 import JumpableComponent from 'src/components/JumpableComponent';
 import DraggableDemo from '@/test/demo/DraggableDemo';
 import MovavableDemo from '@/test/demo/MovableDemo';
-import ScaledComponent from 'src/components/ScaledComponent';export default function Home() {
+import ScaledComponent from 'src/components/ScaledComponent';import { useRouter } from 'next/navigation';
+export default function Home() {
+
+  const router = useRouter(); 
+  function handlerJump(): void {
+    router.push(`/node`);
+  }
+
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
@@ -18,7 +26,9 @@ import ScaledComponent from 'src/components/ScaledComponent';export default func
         <DraggableDemo />
         <div>ScaledComponent 可缩放组件</div>
         <ScaledComponent content='缩放组件'/>
-      
+        
+        <div>查看node</div>
+        <button className="mr-2" style={{border: '1px solid black',width:'50px',height:'30px'}} onClick={() => handlerJump()}>Node页面</button>
         
         
       </main>
