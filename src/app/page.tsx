@@ -18,9 +18,6 @@ import ScaledComponent from 'src/components/ScaledComponent';export default func
         <DraggableDemo />
         <div>ScaledComponent 可缩放组件</div>
         <ScaledComponent content='缩放组件'/>
-        
-        <div>MovableComponent 可移动组件</div>
-        <MovavableDemo initX={100} initY={150} initSpeed={50}/>
       
         
         
