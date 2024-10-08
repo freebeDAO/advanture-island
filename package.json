@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:dev:mysql": "dotenv -e .env.local -- pnpx prisma migrate dev --name init --schema=./prisma/schema/mysql.prisma",
-    "migrate:dev:postgresql": "dotenv -e .env.local -- pnpx prisma migrate dev --name init --schema=./prisma/schema/postgresql.prisma"
+    "migrate:dev": "dotenv -e .env.local -- pnpx prisma migrate dev --name init "
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",

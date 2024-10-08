@@ -8,12 +8,22 @@ generator client {
   provider = "prisma-client-js"
 }
 
+//datasource db {
+//  provider = "postgresql"
+//  url = env("POSTGRES_PRISMA_URL")
+//  directUrl = env("POSTGRES_URL_NON_POOLING")
+//}
+
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+  provider = "mysql"
+  url = env("DATABASE_URL_MYSQL")
 }
 
+model Node {
+  id        Int      @id @default(autoincrement())
+  x        Int @default(0)
+  y        Int @default(0)
+}
 
 model User {
   id        Int      @id @default(autoincrement())
