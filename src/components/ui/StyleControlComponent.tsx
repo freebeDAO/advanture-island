@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import { Select, Input } from 'src/components/ui/MyFormComponent';
 
 const StyleControlComponent = () => {
@@ -116,7 +116,7 @@ const StyleControlComponent = () => {
         />
       </div>
       <div className="col-span-2 p-4 mx-40 space-y-4">
-        <div style={targetStyle}>
+        <div style={targetStyle as CSSProperties}>
           <span style={{ fontSize: `${fontSize}px`, color: fontColor }}>{text}</span>
         </div>
       </div>
