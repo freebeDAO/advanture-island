@@ -13,3 +13,10 @@ model User {
     nickname String?
     avatar   String?
 }
+
+model WalletVerificationCode {
+  id        Int      @id @default(autoincrement())
+  wallet    String   @unique
+  code      String
+  createdAt DateTime @default(now())
+}

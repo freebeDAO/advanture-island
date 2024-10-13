@@ -3,9 +3,6 @@ import { prisma } from "@/lib/prisma";
 import nacl from "tweetnacl";
 import jwt from "jsonwebtoken";
 
-// In-memory store for wallet verification codes
-let walletVerificationCodes: { [key: string]: string } = {};
-
 export async function POST(req: NextRequest) {
   try {
     const { wallet, signature, publicKey } = await req.json();
@@ -16,15 +13,20 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+    // 从数据库中获取验证码
+    const verificationRecord = await prisma.walletVerificationCode.findUnique({
+      where: { wallet },
+    });
 
     // Verify the wallet signature using NaCl
-    const verificationCode = walletVerificationCodes[wallet];
-    if (!verificationCode) {
+    if (!verificationRecord) {
       return NextResponse.json(
         { message: "No verification code found for this wallet" },
         { status: 400 }
       );
     }
+
+    const verificationCode = verificationRecord.code;
 
     const message = new TextEncoder().encode(verificationCode);
     const publicKeyBytes = new Uint8Array(Buffer.from(publicKey, "hex"));

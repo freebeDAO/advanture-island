@@ -1,7 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-
-// In-memory store for wallet verification codes
-let walletVerificationCodes: { [key: string]: string } = {};
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,7 +16,13 @@ export async function POST(req: NextRequest) {
     const verificationCode = Math.floor(
       100000 + Math.random() * 900000
     ).toString();
-    walletVerificationCodes[wallet] = verificationCode;
+
+    // 将验证码持久化到数据库
+    await prisma.walletVerificationCode.upsert({
+      where: { wallet },
+      update: { code: verificationCode, createdAt: new Date() },
+      create: { wallet, code: verificationCode },
+    });
 
     return NextResponse.json(
       { code: 0, data: { verifyCode: verificationCode } },
