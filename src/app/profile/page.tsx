@@ -5,8 +5,8 @@ import { getUserDetailsFromApi } from "src/api/user";
 
 interface UserProfile {
   nickname: string;
-  avatarUrl: string;
-  wallet: string;
+  avatar: string;
+  address: string;
 }
 
 export default function Profile() {
@@ -49,11 +49,11 @@ export default function Profile() {
           {userData.nickname}'s Profile
         </h2>
         <img
-          src={userData.avatarUrl}
+          src={userData.avatar}
           alt="Avatar"
           className="w-24 h-24 rounded-full mx-auto mb-4"
         />
-        <p className="text-xl">Wallet Address: {userData.wallet}</p>
+        <p className="text-xl">Wallet Address: {userData.address}</p>
       </div>
     </div>
   );
