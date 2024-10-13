@@ -43,3 +43,10 @@ export interface TLog {
   message: string;
   messageTwo?: string;
 }
+
+import { NextRequest } from "next/server";
+
+// 扩展 NextRequest 以支持 file 属性
+export interface ExtendedNextApiRequest extends NextRequest {
+  file?: Express.Multer.File; // 定义 file 类型
+}

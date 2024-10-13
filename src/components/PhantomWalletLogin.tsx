@@ -4,20 +4,36 @@ import { useEffect, useState } from "react";
 import WidgetButton from "@/components/Widget/WidgetButton";
 import getProvider from "@/lib/utils/getProvider";
 import { getWalletVerificationCode, walletLogin } from "@/api/login";
+import { useRouter } from "next/navigation";
 
-const PhantomWalletLogin = ({
-  onLoginSuccess,
-}: {
-  onLoginSuccess: (token: string) => void;
-}) => {
+const PhantomWalletLogin = ({}: {}) => {
   const [provider, setProvider] = useState<any>(null);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const router = useRouter(); // 使用 router 进行跳转
 
   useEffect(() => {
     const phantomProvider = getProvider();
     setProvider(phantomProvider);
   }, []);
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      if (provider && provider.isConnected) {
+        console.log("Phantom wallet is already connected");
+        return; // Wallet is already connected, no need to call connect again
+      }
+
+      try {
+        const response = await provider.connect();
+        console.log("Connected:", response);
+      } catch (error) {
+        console.error("Error connecting to Phantom wallet:", error);
+      }
+    };
+
+    checkConnection();
+  }, [provider]);
 
   const connectWallet = async () => {
     if (provider) {
@@ -51,8 +67,14 @@ const PhantomWalletLogin = ({
           publicKeyHex
         );
         if (loginResponse.code === 0) {
-          localStorage.setItem("token", loginResponse.data);
-          onLoginSuccess(loginResponse.data);
+          const { token, isNewUser } = loginResponse.data;
+          localStorage.setItem("token", token);
+
+          if (isNewUser) {
+            router.push("/setupProfile");
+          } else {
+            router.push("/profile");
+          }
         } else {
           setErrorMessage("Login failed.");
         }

@@ -10,12 +10,16 @@ const getAuthToken = () => {
 export const apiRequest = async (
   endpoint: string,
   method: string = "GET",
-  body: any = null
+  body: any = null,
+  contentType: string = "application/json"
 ) => {
   const token = getAuthToken(); // 获取 Bearer 令牌
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
+  const headers: Record<string, string> = {};
+
+  // 设置 Content-Type
+  if (contentType) {
+    headers["Content-Type"] = contentType;
+  }
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -26,7 +30,7 @@ export const apiRequest = async (
       url: `${API_URL}${endpoint}`,
       method,
       headers,
-      data: body ? JSON.stringify(body) : null,
+      data: contentType === "multipart/form-data" ? body : JSON.stringify(body),
     });
 
     return response.data;

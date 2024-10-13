@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
 
     // Find or create the user in the database
     let user = await prisma.user.findUnique({ where: { address: wallet } });
+    let isNewUser = false;
     if (!user) {
       user = await prisma.user.create({
         data: {
@@ -49,6 +50,7 @@ export async function POST(req: NextRequest) {
           avatar: null,
         },
       });
+      isNewUser = true;
     }
 
     // Generate JWT token
@@ -58,7 +60,10 @@ export async function POST(req: NextRequest) {
       { expiresIn: "7d" }
     );
 
-    return NextResponse.json({ code: 0, data: token }, { status: 200 });
+    return NextResponse.json(
+      { code: 0, data: { token, isNewUser } },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ message: "Login failed" }, { status: 500 });
   }

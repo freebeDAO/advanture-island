@@ -2,26 +2,10 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { getUserDetailsFromApi } from "src/api/user";
 import PhantomWalletLogin from "src/components/PhantomWalletLogin";
 
 export default function Home() {
   const [errorMessage, setErrorMessage] = useState("");
-
-  // 登录成功后获取用户详细信息
-  const fetchUserDetails = async (token: string) => {
-    try {
-      const response = await getUserDetailsFromApi(token);
-      if (response.code === 0) {
-        console.log("login success", response.data);
-      } else {
-        setErrorMessage("Failed to fetch user details.");
-      }
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-      setErrorMessage("Failed to fetch user details.");
-    }
-  };
 
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -37,7 +21,7 @@ export default function Home() {
             )}
 
             {/* Phantom Wallet 登录组件 */}
-            <PhantomWalletLogin onLoginSuccess={fetchUserDetails} />
+            <PhantomWalletLogin />
           </div>
         </div>
       </main>
