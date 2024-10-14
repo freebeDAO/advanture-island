@@ -1,9 +1,8 @@
 "use client";
-// src/components/ui/DraggableComponent.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const DraggableComponent: React.FC = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 30 });
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
@@ -16,7 +15,7 @@ const DraggableComponent: React.FC = () => {
     });
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent) => {
     if (dragging) {
       // Move element with the mouse, adjusting for the initial offset
       setPosition({
@@ -31,12 +30,27 @@ const DraggableComponent: React.FC = () => {
     setDragging(false);
   };
 
+  useEffect(() => {
+    // Attach event listeners to document when dragging starts
+    if (dragging) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+    } else {
+      // Clean up event listeners when dragging stops
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    }
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [dragging, offset]);
+
   return (
     <div
       onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp} // Handle case when mouse leaves the window while dragging
       style={{
         position: "absolute",
         left: `${position.x}px`,
