@@ -1,47 +1,50 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import 'animate.css';
+"use client";
+import React, { useState, useEffect } from "react";
+import "animate.css";
 
-interface JumpableComponent {
-  content?: string;
+interface JumpableProps {
+    children?: React.ReactNode;
 }
-const JumpableComponent = ({ content = 'JumpableComponent' }) => {
-const [isBouncing, setIsBouncing] = useState(false);
-const style = {
-    position: 'relative',
-    width: '200px',
-    height: '100px',
-    backgroundColor: 'red',
-  };
-  
-const handleBounce = ()=>{
-  setIsBouncing(true);
-  setTimeout(() => {
-    setIsBouncing(false);
-  }, 1000);
-}
-const onKeyDown = (event: KeyboardEvent) => {
-  if (event.code === 'Space') {
-    handleBounce();
-  }
-};
-useEffect(() => {
-    document.addEventListener('keydown', onKeyDown);
-    return () => {
-    document.removeEventListener('keydown', onKeyDown);
+const JumpableComponent: React.FC<JumpableProps> = (props: JumpableProps) => {
+    const { children } = { ...props };
+    const [isBouncing, setIsBouncing] = useState(false);
+    // const style = {
+    //     position: "relative",
+    //     width: "200px",
+    //     height: "100px",
+    //     border: "1px solid black",
+    //     // backgroundColor: 'red',
+    // };
+
+    const handleBounce = () => {
+        setIsBouncing(true);
+        setTimeout(() => {
+            setIsBouncing(false);
+        }, 1000);
     };
-}, []);
-  return (
-    <>
-    <div 
-      data-testid='jumpable-div'
-      style={style} 
-      className={`${isBouncing ? 'animate__animated animate__bounce' : ''}`}
-      onClick={handleBounce}      
-    >{content}</div>
-    
-    </>
-  );
+    const onKeyDown = (event: KeyboardEvent) => {
+        if (event.code === "Space") {
+            handleBounce();
+        }
+    };
+    useEffect(() => {
+        document.addEventListener("keydown", onKeyDown);
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, []);
+    return (
+        <>
+            <div
+                data-testid="jumpable-div"
+                // style={style}
+                className={`${isBouncing ? "animate__animated animate__bounce" : ""}`}
+                onClick={handleBounce}
+            >
+                {children}
+            </div>
+        </>
+    );
 };
 
 export default JumpableComponent;
