@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int                @id @default(autoincrement())
+  address     String             @unique
+  nickname    String?
+  avatar      String?
+  created_at  DateTime           @default(now())
+  components  ComponentPosition[]
+}
+
+model Nonce {
+  address String @id
+  nonce   String
+  createdAt DateTime @default(now())
+}
+
+model ComponentPosition {
+  id        Int      @id @default(autoincrement())
+  x         Float    @default(0)
+  y         Float    @default(0)
+  direction String?  // 可选的移动方向
+  speed     Float?   // 可选的移动速度
+  userId    Int      // 关联到用户
+  user      User     @relation(fields: [userId], references: [id])
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
