@@ -4,6 +4,7 @@ import Draggable from "src/app/test/Draggable"
 import StyleControl from "src/app/test/StyleControl"
 import TwoCircle from "src/app/test/TwoCircle"
 import Jumpable from "src/app/test/Jumpable"
+import NodeServer from "src/app/test/nodeServer"
 
 export default function Home() {
   return (
@@ -25,6 +26,9 @@ export default function Home() {
         </h2>
         <h2 className="h-[1000px] text-2xl text-gray-400 border border-gray-300 p-2 w-full overflow-hidden">
           <Jumpable />
+        </h2>
+        <h2 className="h-[1000px] text-2xl text-gray-400 border border-gray-300 p-2 w-full overflow-hidden">
+          <NodeServer />
         </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
