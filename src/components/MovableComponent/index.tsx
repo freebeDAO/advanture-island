@@ -6,7 +6,7 @@ const baseWidth = 80
 const time = 5 // 值越大，移动抖动越大
 
 const MovableComponent = React.forwardRef<any>((props, ref) => {
-  const { speed = 2, autoDirection = "down" } = props.config
+  const { speed = 0.5, autoDirection = "down" } = props.config
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const currentWs = useRef<any>()
   const flag = useRef<boolean>(true)

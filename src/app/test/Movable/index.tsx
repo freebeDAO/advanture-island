@@ -28,7 +28,7 @@ export default function Home() {
         >
           <MovableComponent
             ref={componentRef}
-            config={{ dirction: "right", speed: 2 }}
+            config={{ dirction: "right", speed: 0.5 }}
           />
         </div>
       </div>

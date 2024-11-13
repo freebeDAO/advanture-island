@@ -27,20 +27,12 @@ function sendData (x, y) {
         currentId = max_id + 1
         connection.query(insertSql, values, (error) => {
           if (error) throw error
-          // res.json({
-          //   code: '200',
-          //   data: "新增成功"
-          // })
           connection.release()
         })
       })
     } else {
       connection.query(insertSql, values, (error) => {
         if (error) throw error
-        // res.json({
-        //   code: '200',
-        //   data: "新增成功"
-        // })
         connection.release()
       })
     }
@@ -63,11 +55,9 @@ class Point {
 
 wss.on('connection', function connection (ws) {
   ws.on('message', function incoming (res) {
-    // console.log('received: %s', JSON.parse(res));
     let data = JSON.parse(res)
     sendData(data.x, data.y)
-    // ws.send(`Server received: ${data.x}`);
-  });
+  })
 
   ws.on('close', function () {
     console.log('The client has disconnected.')
