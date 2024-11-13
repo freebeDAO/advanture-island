@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react"
+import GlobalEvent from "src/lib/utils/globalEvent"
+const globalEvent = GlobalEvent.getInstance()
 const time = 5
 const totalCost = 350
 export const JumpableComponent: React.FC<any> = () => {
   const [position, setPosition] = useState({ top: 578, left: 0 })
 
   useEffect(() => {
-    window.addEventListener("keydown", onKeyDown)
-    return () => {
-      window.removeEventListener("keydown", onKeyDown) // 销毁
-    }
+    globalEvent.subscribe("keydown", (e: any) => {
+      onKeyDown(e)
+    })
   }, [])
 
   function onKeyDown(e: any) {
+    e.preventDefault()
     switch (e.keyCode) {
       case 32:
         startMove()

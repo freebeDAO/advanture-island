@@ -49,6 +49,7 @@ app.post('/api/addPoint', (req, res) => {
         if (error) throw error
         let max_id = results[0].max_id !== null ? results[0].max_id : 0
         values[2] = max_id + 1
+        currentId = max_id + 1
         connection.query(insertSql, values, (error) => {
           if (error) throw error
           res.json({

@@ -29,7 +29,7 @@ export default function Home() {
     axios({
       method: "put",
       url: "http://127.0.0.1:8888/api/editPoint",
-      data: qs.stringify({ x: 16, y: 19, id: 1 }),
+      data: qs.stringify({ x: 116, y: 123, id: 1 }),
     })
   }
 
@@ -68,7 +68,7 @@ export default function Home() {
       <div
         className="cursor-pointer text-blue-600 text-[16px]"
         onClick={() => {
-          deletePoint(7)
+          deletePoint(6)
         }}
       >
         deletePoint

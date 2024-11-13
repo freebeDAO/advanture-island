@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import Scaled from "src/app/test/Scaled"
 import Draggable from "src/app/test/Draggable"
@@ -5,8 +6,22 @@ import StyleControl from "src/app/test/StyleControl"
 import TwoCircle from "src/app/test/TwoCircle"
 import Jumpable from "src/app/test/Jumpable"
 import NodeServer from "src/app/test/nodeServer"
+import Movable from "src/app/test/Movable"
+import { useEffect } from "react"
+import GlobalEvent from "src/lib/utils/globalEvent"
+const globalEvent = GlobalEvent.getInstance()
 
 export default function Home() {
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyDown)
+    return () => {
+      window.removeEventListener("keydown", onKeyDown) // 销毁
+    }
+  }, [])
+
+  function onKeyDown(e) {
+    globalEvent.submit("keydown", e)
+  }
   return (
     <div className="min-h-screen p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2  sm:items-start">
@@ -29,6 +44,9 @@ export default function Home() {
         </h2>
         <h2 className="h-[1000px] text-2xl text-gray-400 border border-gray-300 p-2 w-full overflow-hidden">
           <NodeServer />
+        </h2>
+        <h2 className="h-[1000px] text-2xl text-gray-400 border border-gray-300 p-2 w-full overflow-hidden">
+          <Movable />
         </h2>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center mt-8">
